@@ -292,6 +292,19 @@ function mostrarMensagem(){
     msg.remove();
   }, 3000);
 }
+    function finalizarPedido(){
+  mostrarMensagem(); // mostra a mensagem bonita
+
+  const numero = "244928363335"; 
+
+  const mensagem = "Olá, quero finalizar meu pedido na ArtenaShop 🛒";
+
+  const url = "https://wa.me/" + 928363335 + "?text=" + encodeURIComponent(mensagem);
+
+  setTimeout(() => {
+    window.open(url, "_blank");
+  }, 1000);
+}    
         
 </script>
 🛒 
