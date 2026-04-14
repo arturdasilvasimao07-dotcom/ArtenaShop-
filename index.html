@@ -21,9 +21,9 @@
       <img src="perfume.jpg" style="width:100%; border-radius:10px;">
       <h3>Perfume Premium</h3>
       <p><b>15.000 Kz</b></p>
-      <button style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-        Comprar
-      </button>
+      <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+Adicionar ao carrinho
+</button>
     </div>
 
     <!-- PRODUTO 2 -->
@@ -31,9 +31,9 @@
       <img src="kit.jpg" style="width:100%; border-radius:10px;">
       <h3>Kit Cosmético</h3>
       <p><b>12.000 Kz</b></p>
-      <button style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-        Comprar
-      </button>
+      <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+Adicionar ao carrinho
+</button>
     </div>
 
     <!-- PRODUTO 3 -->
@@ -41,18 +41,18 @@
       <img src="fone.jpg" style="width:100%; border-radius:10px;">
       <h3>Fone Bluetooth</h3>
       <p><b>8.000 Kz</b></p>
-      <button style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-        Comprar
-      </button>
+      <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+Adicionar ao carrinho
+</button>
     </div>
 <!-- PRODUTO 4 -->
 <div style="background:white; width:250px; margin:10px; padding:15px; border-radius:10px; box-shadow:0 5px 10px rgba(0,0,0,0.1); text-align:center;">
   <img src="creme.jpg" style="width:100%; border-radius:10px;">
   <h3>Creme Facial</h3>
   <p><b>7.000 Kz</b></p>
-  <button style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-    Comprar
-  </button>
+  <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+Adicionar ao carrinho
+</button>
 </div>
 
 <!-- PRODUTO 5 -->
@@ -60,9 +60,9 @@
   <img src="relogio.jpg" style="width:100%; border-radius:10px;">
   <h3>Relógio Digital</h3>
   <p><b>20.000 Kz</b></p>
-  <button style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-    Comprar
-  </button>
+  <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+Adicionar ao carrinho
+</button>
 </div>
 
 <!-- PRODUTO 6 -->
@@ -70,9 +70,9 @@
   <img src="chuteira.jpg" style="width:100%; border-radius:10px;">
   <h3>chuteira pretator</h3>
   <p><b>9.000 Kz</b></p>
-  <button style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-    Comprar
-  </button>
+  <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+Adicionar ao carrinho
+</button>
 </div>
 
 <!-- PRODUTO 7 -->
@@ -80,9 +80,9 @@
   <img src="perfume.jpg" style="width:100%; border-radius:10px;">
   <h3>Perfume Luxo</h3>
   <p><b>18.000 Kz</b></p>
-  <button style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-    Comprar
-  </button>
+<button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+Adicionar ao carrinho
+</button>
 </div>
 
 <!-- PRODUTO 8 -->
@@ -90,9 +90,9 @@
   <img src="bolsa.jpg" style="width:100%; border-radius:10px;">
   <h3>Bolsa Feminina</h3>
   <p><b>14.000 Kz</b></p>
-  <button style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-    Comprar
-  </button>
+  <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+Adicionar ao carrinho
+</button>
 </div>
 
 <!-- PRODUTO 9 -->
@@ -100,9 +100,9 @@
   <img src="smartwtch.jpg" style="width:100%; border-radius:10px;">
   <h3>Smartwatch</h3>
   <p><b>25.000 Kz</b></p>
-  <button style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-    Comprar
-  </button>
+  <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+Adicionar ao carrinho
+</button>
 </div>
 
 <!-- PRODUTO 10 -->
@@ -110,11 +110,31 @@
   <img src="caixa de som.jpg" style="width:100%; border-radius:10px;">
   <h3>Caixa de Som Bluetooth</h3>
   <p><b>11.000 Kz</b></p>
-  <button style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-    Comprar
-  </button>
+  <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+Adicionar ao carrinho
+</button>
 </div>
-  </div>
+<script>
+let carrinho = [];
 
+function adicionar(nome, preco){
+  carrinho.push({nome, preco});
+  alert(nome + " adicionado ao carrinho!");
+}
+
+function finalizar(){
+  let mensagem = "Pedido ArtenaShop:%0A";
+  let total = 0;
+
+  carrinho.forEach(p => {
+    mensagem += "- " + p.nome + " (" + p.preco + " Kz)%0A";
+    total += p.preco;
+  });
+
+  mensagem += "%0ATotal: " + total + " Kz";
+
+  window.open("https://wa.me/244928363335?text=" + mensagem);
+}
+</script>
 </body>
 </html>
