@@ -21,7 +21,7 @@
       <img src="perfume.jpg" style="width:100%; border-radius:10px;">
       <h3>Perfume Premium</h3>
       <p><b>15.000 Kz</b></p>
-      <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+      <button onclick="adicionar('perfume premium',15.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
 Adicionar ao carrinho
 </button>
     </div>
@@ -31,7 +31,7 @@ Adicionar ao carrinho
       <img src="kit.jpg" style="width:100%; border-radius:10px;">
       <h3>Kit Cosmético</h3>
       <p><b>12.000 Kz</b></p>
-      <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+      <button onclick="adicionar('kit cosmeticos',12.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
 Adicionar ao carrinho
 </button>
     </div>
@@ -41,7 +41,7 @@ Adicionar ao carrinho
       <img src="fone.jpg" style="width:100%; border-radius:10px;">
       <h3>Fone Bluetooth</h3>
       <p><b>8.000 Kz</b></p>
-      <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+      <button onclick="adicionar('fone bluetooth', 8.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
 Adicionar ao carrinho
 </button>
     </div>
@@ -50,7 +50,7 @@ Adicionar ao carrinho
   <img src="creme.jpg" style="width:100%; border-radius:10px;">
   <h3>Creme Facial</h3>
   <p><b>7.000 Kz</b></p>
-  <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+  <button onclick="adicionar('creme facial', 7.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
 Adicionar ao carrinho
 </button>
 </div>
@@ -60,7 +60,7 @@ Adicionar ao carrinho
   <img src="relogio.jpg" style="width:100%; border-radius:10px;">
   <h3>Relógio Digital</h3>
   <p><b>20.000 Kz</b></p>
-  <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+  <button onclick="adicionar('relogio digital', 20.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
 Adicionar ao carrinho
 </button>
 </div>
@@ -70,7 +70,7 @@ Adicionar ao carrinho
   <img src="chuteira.jpg" style="width:100%; border-radius:10px;">
   <h3>chuteira pretator</h3>
   <p><b>9.000 Kz</b></p>
-  <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+  <button onclick="adicionar('chuteira pretator', 9.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
 Adicionar ao carrinho
 </button>
 </div>
@@ -80,7 +80,7 @@ Adicionar ao carrinho
   <img src="perfume.jpg" style="width:100%; border-radius:10px;">
   <h3>Perfume Luxo</h3>
   <p><b>18.000 Kz</b></p>
-<button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+<button onclick="adicionar('perfume luxo', 18.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
 Adicionar ao carrinho
 </button>
 </div>
@@ -90,7 +90,7 @@ Adicionar ao carrinho
   <img src="bolsa.jpg" style="width:100%; border-radius:10px;">
   <h3>Bolsa Feminina</h3>
   <p><b>14.000 Kz</b></p>
-  <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+  <button onclick="adicionar('bolsa femenina', 14.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
 Adicionar ao carrinho
 </button>
 </div>
@@ -100,7 +100,7 @@ Adicionar ao carrinho
   <img src="smartwtch.jpg" style="width:100%; border-radius:10px;">
   <h3>Smartwatch</h3>
   <p><b>25.000 Kz</b></p>
-  <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+  <button onclick="adicionar('smartwatch', 25.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
 Adicionar ao carrinho
 </button>
 </div>
@@ -110,10 +110,17 @@ Adicionar ao carrinho
   <img src="caixa de som.jpg" style="width:100%; border-radius:10px;">
   <h3>Caixa de Som Bluetooth</h3>
   <p><b>11.000 Kz</b></p>
-  <button onclick="adicionar('Nome do Produto', 11000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
+  <button onclick="adicionar('caixa de som bluetooth', 11.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
 Adicionar ao carrinho
 </button>
 </div>
+    <br><br>
+
+<button onclick="finalizar()" 
+style="background:black; color:white; padding:15px; border:none; border-radius:10px;">
+Finalizar Pedido 🛒
+</button>
+    
 <script>
 let carrinho = [];
 
