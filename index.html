@@ -5,6 +5,62 @@
 </head>
 
 <body style="font-family: Arial; background:#f5f5f5; margin:0; padding-top:150px">
+  <div id="painel-carrinho" style="
+position:fixed;
+top:0;
+right:-100%;
+width:300px;
+height:100%;
+background:white;
+box-shadow:-5px 0 15px rgba(0,0,0,0.3);
+padding:15px;
+transition:0.3s;
+z-index:999;
+">
+
+<h2>🛒 Carrinho</h2>
+
+<button onclick="fecharCarrinho()" style="
+background:red;
+color:white;
+border:none;
+padding:5px 10px;
+border-radius:5px;
+">
+Fechar ❌
+</button>
+
+<hr>
+
+<div id="lista-carrinho"></div>
+
+<p><b>Total: <span id="total">0</span> Kz</b></p>
+
+<button onclick="finalizar()" style="
+background:#27ae60;
+color:white;
+border:none;
+padding:10px;
+width:100%;
+border-radius:5px;
+">
+Finalizar Pedido
+</button>
+
+</div>
+  <button onclick="abrirCarrinho()" style="
+position:fixed;
+top:10px;
+right:10px;
+background:#27ae60;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:20px;
+z-index:1000;
+">
+🛒 (<span id="contador">0</span>)
+</button>
   <div id="carrinho-box" style="
 position:fixed;
 top:0;
@@ -16,6 +72,7 @@ padding:10px;
 z-index:999;
 height:120px;
 overflow-y:auto;
+display:none;
     
 ">
 
@@ -203,6 +260,14 @@ function finalizar(){
 
   window.open("https://wa.me/244928363335?text=" + mensagem);
 }
+
+function abrirCarrinho(){
+  document.getElementById("carrinho-box").style.display = "block";
+}
+
+function fecharCarrinho(){
+  document.getElementById("carrinho-box").style.display = "none";
+}     
 </script>
 🛒 
 </body>
