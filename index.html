@@ -195,8 +195,7 @@ Adicionar ao carrinho
 </button>
 </div>
 
-    <button onclick="finalizar()" 
-style="
+    <button onclick="mostrarMensagem()" style="
   position:fixed;
   bottom:20px;
   right:20px;
@@ -206,8 +205,7 @@ style="
   border:none;
   border-radius:50px;
   font-size:16px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.3);
-  margin-top:30px;    
+  box-shadow:0 4px 15px rgba(0,0,0,0.3);    
 ">
       Finalizar pedido 🛒
     </button>
@@ -267,7 +265,28 @@ function abrirCarrinho(){
 
 function fecharCarrinho(){
   document.getElementById("carrinho-box").style.display = "none";
-}     
+}    
+
+function mostrarMensagem(){
+    const msg = document.createElement("div");
+
+msg.innerHTML = "✅ Pedido enviado com sucesso!";
+
+msg.style.position = "fixed";
+msg.style.top = "50%";
+msg.style.left = "50%";
+msg.style.transform = "translate(-50%, -50%)";
+msg.style.background = "#27ae60";
+msg.style.color = "white";
+msg.style.padding = "20px";
+msg.style.borderRadius = "10px";
+msg.style.zIndex = "2000";
+
+document.body.appendChild(msg);
+}
+        setTimeout(() => {
+    msg.remove();
+}, 3000);
 </script>
 🛒 
 </body>
