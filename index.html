@@ -266,28 +266,33 @@ function abrirCarrinho(){
 function fecharCarrinho(){
   document.getElementById("carrinho-box").style.display = "none";
 }    
-
 function mostrarMensagem(){
-    const msg = document.createElement("div");
+  // remove mensagens antigas
+  const antiga = document.getElementById("msg-sucesso");
+  if (antiga) antiga.remove();
 
-msg.innerHTML = "✅ Pedido enviado com sucesso!";
+  const msg = document.createElement("div");
+  msg.id = "msg-sucesso";
 
-msg.style.position = "fixed";
-msg.style.top = "50%";
-msg.style.left = "50%";
-msg.style.transform = "translate(-50%, -50%)";
-msg.style.background = "#27ae60";
-msg.style.color = "white";
-msg.style.padding = "20px";
-msg.style.borderRadius = "10px";
-msg.style.zIndex = "2000";
+  msg.innerHTML = "✅ Pedido enviado com sucesso!";
 
-document.body.appendChild(msg);
-}
- setTimeout(() => {
+  msg.style.position = "fixed";
+  msg.style.top = "50%";
+  msg.style.left = "50%";
+  msg.style.transform = "translate(-50%, -50%)";
+  msg.style.background = "#27ae60";
+  msg.style.color = "white";
+  msg.style.padding = "20px";
+  msg.style.borderRadius = "10px";
+  msg.style.zIndex = "2000";
+
+  document.body.appendChild(msg);
+
+  setTimeout(() => {
     msg.remove();
-}, 3000);
-}       
+  }, 3000);
+}
+        
 </script>
 🛒 
 </body>
