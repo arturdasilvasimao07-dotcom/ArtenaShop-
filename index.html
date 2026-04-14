@@ -5,6 +5,37 @@
 </head>
 
 <body style="font-family: Arial; background:#f5f5f5; margin:0;">
+  <div id="carrinho-box" style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+background:#111;
+color:white;
+padding:10px;
+z-index:999;
+">
+
+<h3>🛒 Carrinho (<span id="contador">0</span>)</h3>
+
+<div id="lista-carrinho"></div>
+
+<p><b>Total: <span id="total">0</span> Kz</b></p>
+
+<button onclick="finalizar()" style="
+background:#27ae60;
+color:white;
+padding:10px;
+border:none;
+border-radius:5px;
+width:100%;
+">
+Finalizar Pedido
+</button>
+
+</div>
+
+<br><br><br><br><br><br>
 
   <!-- TOPO -->
   <div style="text-align:center; padding:20px;">
@@ -129,24 +160,51 @@ style="
   box-shadow:0 4px 15px rgba(0,0,0,0.3);
   margin-top:30px;    
 ">
-🛒 Finalizar
-</button>
-    
-<script>
+      Finalizar pedido 🛒
+    </button>
+      <script>
 let carrinho = [];
 
 function adicionar(nome, preco){
   carrinho.push({nome, preco});
-  alert(nome + " adicionado ao carrinho!");
+  atualizarCarrinho();
+}
+
+function remover(index){
+  carrinho.splice(index, 1);
+  atualizarCarrinho();
+}
+
+function atualizarCarrinho(){
+  let lista = document.getElementById("lista-carrinho");
+  let contador = document.getElementById("contador");
+  let total = document.getElementById("total");
+
+  lista.innerHTML = "";
+  let soma = 0;
+
+  carrinho.forEach((item, index) => {
+    soma += item.preco;
+
+    lista.innerHTML += `
+      <div style="margin-bottom:5px;">
+        ${item.nome} - ${item.preco} Kz
+        <button onclick="remover(${index})" style="color:red;">❌</button>
+      </div>
+    `;
+  });
+
+  contador.innerText = carrinho.length;
+  total.innerText = soma;
 }
 
 function finalizar(){
   let mensagem = "Pedido ArtenaShop:%0A";
   let total = 0;
 
-  carrinho.forEach(p => {
-    mensagem += "- " + p.nome + " (" + p.preco + " Kz)%0A";
-    total += p.preco;
+  carrinho.forEach(item => {
+    mensagem += "- " + item.nome + " (" + item.preco + " Kz)%0A";
+    total += item.preco;
   });
 
   mensagem += "%0ATotal: " + total + " Kz";
@@ -154,5 +212,6 @@ function finalizar(){
   window.open("https://wa.me/244928363335?text=" + mensagem);
 }
 </script>
+🛒 
 </body>
 </html>
