@@ -271,35 +271,61 @@ function enviarPedido(){
 
   let total = 0;
 
+  // AGRUPAR PRODUTOS (quantidade)
+  let resumo = {};
+
+  carrinho.forEach(item => {
+    if(resumo[item.nome]){
+      resumo[item.nome].qtd += 1;
+      resumo[item.nome].total += item.preco;
+    } else {
+      resumo[item.nome] = {
+        qtd: 1,
+        preco: item.preco,
+        total: item.preco
+      };
+    }
+  });
+
+  // FORMATAR PREÇO
+  function formatar(valor){
+    return valor.toLocaleString("pt-BR");
+  }
+
   let msg = "🛒 *NOVO PEDIDO - ArtenaShop*\n";
   msg += "━━━━━━━━━━━━━━━\n";
   msg += "📦 *Pedido Nº:* " + numeroPedido + "\n";
   msg += "📅 *Data:* " + dataFormatada + "\n";
   msg += "⏰ *Hora:* " + horaFormatada + "\n\n";
 
-  msg += "🛍️ *Itens:*\n\n";
+  msg += "🛍️ *Itens do Pedido:*\n\n";
 
-  carrinho.forEach(item=>{
-    msg += "• " + item.nome + " — " + item.preco + " Kz\n\n";
-    total += item.preco;
-  });
+  for(let nomeProduto in resumo){
+    let item = resumo[nomeProduto];
+
+    msg += `• ${item.qtd}x ${nomeProduto}\n`;
+    msg += `   💵 ${formatar(item.total)} Kz\n\n`;
+
+    total += item.total;
+  }
 
   msg += "━━━━━━━━━━━━━━━\n";
-  msg += "💰 *Total: " + total + " Kz*\n";
-  msg += "━━━━━━━━━━━━━━━\n";
+  msg += "💰 *Total:* " + formatar(total) + " Kz\n";
+  msg += "━━━━━━━━━━━━━━━\n\n";
 
   msg += "👤 *Cliente:* " + nome + "\n";
   msg += "📍 *Endereço:* " + endereco + "\n\n";
 
   msg += "🚀 Obrigado pela preferência!\n";
   msg += "📞 *Contacto:* 928363335\n";
-  msg += "📌 *Entraremos em contacto em breve.*";
+  msg += "📌 *Observação:* Entraremos em contacto em breve.";
 
   window.open("https://wa.me/244928363335?text=" + encodeURIComponent(msg));
 
   // guardar pedidos
   let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
   pedidos.push({
+    id: numeroPedido,
     nome,
     total,
     data: dataFormatada + " " + horaFormatada
