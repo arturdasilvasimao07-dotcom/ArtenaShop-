@@ -351,18 +351,25 @@ function enviarPedido(){
 }
 
 function carregarPedidos(){
-  let pedidos=JSON.parse(localStorage.getItem("pedidos"))||[];
-  let lista=document.getElementById("lista-pedidos");
+  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+  let lista = document.getElementById("lista-pedidos");
 
-  lista.innerHTML="";
+  lista.innerHTML = "";
 
   pedidos.forEach(p=>{
-    lista.innerHTML+=`
-    <div class="pedido">
-    Cliente: ${p.nome}<br>
-    Total: ${p.total} Kz<br>
-    Data: ${p.data}
-    </div>`;
+    lista.innerHTML += `
+    <div style="
+      background:white;
+      padding:15px;
+      border-radius:12px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom:10px;
+    ">
+      <b>👤 Cliente:</b> ${p.nome}<br><br>
+      <b>💰 Total:</b> ${p.total} Kz<br><br>
+      <b>📅 Data:</b> ${p.data}
+    </div>
+    `;
   });
 }
 
