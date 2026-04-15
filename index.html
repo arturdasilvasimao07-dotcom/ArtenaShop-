@@ -246,40 +246,26 @@ Adicionar ao carrinho
 <button onclick="limparHistorico()" class="btn-limpar">
 🗑 Limpar Histórico
 </button>
-    
-      <script>
+    <script>
 let carrinho = [];
-      function finalizarPedido(){
-    if (carrinho.length === 0){
-        alert("Carrinho vazio!");
-        return;
-    }
 
-    document.getElementById("formulario").style.display = "block";
-}  
-
-// Adicionar produto
+// adicionar produto
 function adicionar(nome, preco){
     carrinho.push({nome, preco});
     atualizarCarrinho();
-  carrinho.push(produto);
-atualizarCarrinho();
-atualizarContadorCarrinho(); // 👈 ISSO AQUI
 }
 
-// Remover produto
+// remover produto
 function remover(index){
     carrinho.splice(index, 1);
     atualizarCarrinho();
 }
 
-// Atualizar carrinho na tela
+// atualizar carrinho
 function atualizarCarrinho(){
     let lista = document.getElementById("lista-carrinho");
     let contador = document.getElementById("contador");
     let totalEl = document.getElementById("total");
-
-    if (!lista) return;
 
     lista.innerHTML = "";
     let soma = 0;
@@ -288,112 +274,53 @@ function atualizarCarrinho(){
         soma += item.preco;
 
         lista.innerHTML += `
-            <div style="margin-bottom:5px;">
-                ${item.nome} - ${item.preco} Kz
-                <button onclick="remover(${index})">❌</button>
-            </div>
+        <div>
+            ${item.nome} - ${item.preco} Kz
+            <button onclick="remover(${index})">❌</button>
+        </div>
         `;
     });
 
-    if (contador) contador.innerText = carrinho.length;
-    if (totalEl) totalEl.innerText = soma;
+    contador.innerText = carrinho.length;
+    totalEl.innerText = soma;
 }
 
-// Mostrar mensagem bonita
-function mostrarMensagem(){
-    // Remove antiga se existir
-    const antiga = document.getElementById("msg-sucesso");
-    if (antiga) antiga.remove();
-
-    const msg = document.createElement("div");
-    msg.id = "msg-sucesso";
-
-    msg.innerHTML = "✅ Pedido enviado com sucesso!";
-
-    msg.style.position = "fixed";
-    msg.style.top = "50%";
-    msg.style.left = "50%";
-    msg.style.transform = "translate(-50%, -50%)";
-    msg.style.background = "#27ae60";
-    msg.style.color = "white";
-    msg.style.padding = "20px";
-    msg.style.borderRadius = "10px";
-    msg.style.zIndex = "2000";
-
-    document.body.appendChild(msg);
-
-    // desaparecer depois de 3s
-    setTimeout(() => {
-        msg.remove();
-    }, 3000);
+// abrir carrinho
+function abrirCarrinho(){
+    document.getElementById("painel-carrinho").style.right = "0";
 }
 
-  function finalizarPedido(){
-    if (carrinho.length === 0){
+// fechar carrinho
+function fecharCarrinho(){
+    document.getElementById("painel-carrinho").style.right = "-100%";
+}
+
+// finalizar pedido
+function finalizarPedido(){
+    if(carrinho.length === 0){
         alert("Carrinho vazio!");
         return;
-      carrinho = [];
-atualizarCarrinho();
-atualizarContadorCarrinho(); // 👈 importante
     }
-
     document.getElementById("formulario").style.display = "block";
 }
 
-
+// enviar pedido
 function enviarPedido(){
-
     let nome = document.getElementById("nome").value;
     let endereco = document.getElementById("endereco").value;
 
-    let numeroPedido = Math.floor(Math.random() * 100000);
+    let total = 0;
+    let mensagem = "🛒 Pedido:\n";
 
-let data = new Date();
-let dataFormatada = data.toLocaleDateString();
-let horaFormatada = data.toLocaleTimeString();
+    carrinho.forEach(item => {
+        mensagem += `${item.nome} - ${item.preco} Kz\n`;
+        total += item.preco;
+    });
 
-let mensagem = "🛒 *NOVO PEDIDO - ArtenaShop*\n";
-mensagem += "━━━━━━━━━━━━━━━\n";
-mensagem += "📦 *Pedido Nº:* " + numeroPedido + "\n";
-mensagem += "📅 *Data:* " + dataFormatada + "\n";
-mensagem += "⏰ *Hora:* " + horaFormatada + "\n\n";
+    mensagem += `Total: ${total} Kz\n`;
+    mensagem += `Cliente: ${nome}\nEndereço: ${endereco}`;
 
-mensagem += "🛍️ *Itens do Pedido:*\n";
-
-let total = 0;
-
-carrinho.forEach(item => {
-    mensagem += "• " + item.nome + " — 💵 *" + item.preco + " Kz*\n\n";
-    total += item.preco;
-});
-
-mensagem += "\n━━━━━━━━━━━━━━━\n";
-mensagem += "💰 *Total:* " + total + " Kz\n";
-mensagem += "━━━━━━━━━━━━━━━\n";
-
-mensagem += "\n👤 *Cliente:* " + nome;
-mensagem += "\n📍 *Endereço:* " + endereco;
-
-mensagem += "\n\n🚀 Obrigado pela preferência!";
-mensagem += "\n📞 *Contacto:* 928363335";
-mensagem += "\n\n📌 *Observação:* Entraremos em contacto em breve.";
-
-let url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
-let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
-
-let novoPedido = {
-    id: numeroPedido,
-    nome: nome,
-    endereco: endereco,
-    itens: carrinho,
-    total: total,
-    data: dataFormatada,
-    hora: horaFormatada
-};
-
-pedidos.push(novoPedido);
-
-localStorage.setItem("pedidos", JSON.stringify(pedidos));
+    let url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
 
     window.open(url, "_blank");
 
@@ -401,53 +328,12 @@ localStorage.setItem("pedidos", JSON.stringify(pedidos));
     atualizarCarrinho();
 
     document.getElementById("formulario").style.display = "none";
-function carregarPedidos(){
-    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
-    let lista = document.getElementById("lista-pedidos");
+}
 
-    lista.innerHTML = "";
-
-    pedidos.forEach(pedido => {
-        let div = document.createElement("div");
-
-        div.style.background = "#fff";
-        div.style.padding = "10px";
-        div.style.marginBottom = "10px";
-        div.style.borderRadius = "10px";
-
-        div.innerHTML = `
-            <strong>Pedido Nº:</strong> ${pedido.id}<br>
-            <strong>Cliente:</strong> ${pedido.nome}<br>
-            <strong>Total:</strong> ${pedido.total} Kz<br>
-            <strong>Data:</strong> ${pedido.data} ${pedido.hora}
-        `;
-
-        lista.appendChild(div);
-    });
-function limparPedidos(){
+// limpar histórico
+function limparHistorico(){
     localStorage.removeItem("pedidos");
-  
-    function atualizarCarrinho() {
-    let lista = document.getElementById("lista-carrinho");
-    let total = document.getElementById("total");
-    let contador = document.getElementById("contador");
-
-    lista.innerHTML = "";
-
-    let soma = 0;
-
-    carrinho.forEach(item => {
-        let div = document.createElement("div");
-        div.innerHTML = `
-            <p>${item.nome} - ${item.preco} Kz</p>
-        `;
-        lista.appendChild(div);
-
-        soma += item.preco;
-    });
-
-    total.innerText = soma;
-    contador.innerText = carrinho.length;
+    document.getElementById("lista-pedidos").innerHTML = "";
 }
 </script>
  
