@@ -240,7 +240,8 @@ Adicionar ao carrinho
   </button>
 </div>
     <h2>📦 Meus Pedidos</h2>
-<div id="lista-pedidos"></div>
+<div id="lista-pedidos"> 
+</div>
     
 <button onclick="limparHistorico()" class="btn-limpar">
 🗑 Limpar Histórico
@@ -426,11 +427,28 @@ function carregarPedidos(){
 function limparPedidos(){
     localStorage.removeItem("pedidos");
   
-    carregarPedidos();function atualizarContadorCarrinho() {
-    let contador = document.getElementById("contador-carrinho");
+    function atualizarCarrinho() {
+    let lista = document.getElementById("lista-carrinho");
+    let total = document.getElementById("total");
+    let contador = document.getElementById("contador");
+
+    lista.innerHTML = "";
+
+    let soma = 0;
+
+    carrinho.forEach(item => {
+        let div = document.createElement("div");
+        div.innerHTML = `
+            <p>${item.nome} - ${item.preco} Kz</p>
+        `;
+        lista.appendChild(div);
+
+        soma += item.preco;
+    });
+
+    total.innerText = soma;
     contador.innerText = carrinho.length;
 }
-
 </script>
  
 </body>
