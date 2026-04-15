@@ -287,6 +287,13 @@ function finalizarPedido(){
         return;
     }
 
+    // 👇 pedir dados do cliente
+    let nome = prompt("Qual é o seu nome?");
+    if (!nome) return;
+
+    let endereco = prompt("Qual é o seu endereço?");
+    if (!endereco) return;
+
     mostrarMensagem();
 
     let mensagem = "🛒 *Pedido ArtenaShop*\n\n";
@@ -297,15 +304,19 @@ function finalizarPedido(){
         total += item.preco;
     });
 
-    mensagem += "\n💰 *Total: " + total + " Kz*";
+    mensagem += "\n💰 *Total: " + total + " Kz*\n\n";
+    mensagem += "👤 Nome: " + nome + "\n";
+    mensagem += "📍 Endereço: " + endereco;
 
     const url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
 
-    // abre whatsapp depois de 1s
     setTimeout(() => {
         window.open(url, "_blank");
     }, 1000);
+carrinho = [];
+atualizarCarrinho();
 }
+
 </script>
  
 </body>
