@@ -31,7 +31,6 @@
       padding:10px;
       border:none;
       border-radius:5px;
-      cursor:pointer;
     }
 
     .btn-limpar{
@@ -42,13 +41,9 @@
       border-radius:8px;
       cursor:pointer;
       margin-top:10px;
+      width:100%;
     }
 
-    .btn-limpar:hover{
-      background:#cc0000;
-    }
-
-    /* CARRINHO */
     #carrinho{
       position:fixed;
       top:0;
@@ -72,7 +67,6 @@
       padding:10px 15px;
       border-radius:20px;
       z-index:1000;
-      cursor:pointer;
     }
 
     #finalizar-btn{
@@ -84,9 +78,9 @@
       padding:15px;
       border:none;
       border-radius:50px;
-      cursor:pointer;
     }
 
+    /* FORMULÁRIO ORIGINAL */
     #formulario{
       display:none;
       position:fixed;
@@ -96,7 +90,18 @@
       background:white;
       padding:20px;
       border-radius:10px;
-      z-index:2000;
+      box-shadow:0 4px 15px rgba(0,0,0,0.3);
+      z-index:3000;
+      width:250px;
+      text-align:center;
+    }
+
+    #formulario input{
+      width:100%;
+      margin-bottom:10px;
+      padding:10px;
+      border-radius:5px;
+      border:1px solid #ccc;
     }
   </style>
 </head>
@@ -124,9 +129,9 @@
 </button>
 </div>
 
-<!-- TOPO -->
+<!-- TOPO COM TUA IMAGEM -->
 <div style="text-align:center; padding:20px;">
-  <img src="logo.png" style="width:100px;">
+  <img src="8EA06E2D-D680-4B81-A5BE-98623B87500B.png" style="width:100px;">
   <h1>🛍️ ArtenaShop</h1>
   <p>Loja online de cosméticos, perfumes e tecnologia</p>
 </div>
@@ -198,7 +203,7 @@
   </div>
 
   <div class="produto">
-    <img src="caixa.jpg">
+    <img src="caixa de som.jpg">
     <h3>Caixa de Som Bluetooth</h3>
     <p><b>11000 Kz</b></p>
     <button class="btn" onclick="adicionar('Caixa de Som',11000)">Adicionar</button>
@@ -211,12 +216,16 @@
 Finalizar 🛒
 </button>
 
-<!-- FORMULÁRIO -->
+<!-- FORMULÁRIO ORIGINAL -->
 <div id="formulario">
   <h3>Finalizar Pedido</h3>
-  <input id="nome" placeholder="Seu nome"><br><br>
-  <input id="endereco" placeholder="Endereço"><br><br>
-  <button onclick="enviarPedido()">Enviar</button>
+
+  <input id="nome" placeholder="Seu nome">
+  <input id="endereco" placeholder="Seu endereço">
+
+  <button class="btn" onclick="enviarPedido()">
+Enviar para WhatsApp
+</button>
 </div>
 
 <script>
@@ -281,17 +290,26 @@ function enviarPedido(){
   let nome = document.getElementById("nome").value;
   let endereco = document.getElementById("endereco").value;
 
+  let numero = Math.floor(Math.random()*100000);
+
+  let mensagem = "🛒 *NOVO PEDIDO - ArtenaShop*\n";
+  mensagem += "━━━━━━━━━━━━━━━\n";
+  mensagem += "📦 Pedido Nº: " + numero + "\n\n";
+
   let total = 0;
-  let mensagem = "🛒 *NOVO PEDIDO - ArtenaShop*\n\n";
 
   carrinho.forEach(item=>{
-    mensagem += "• " + item.nome + " — " + item.preco + " Kz\n";
+    mensagem += "• " + item.nome + " — 💵 " + item.preco + " Kz\n\n";
     total += item.preco;
   });
 
-  mensagem += "\n💰 Total: " + total + " Kz";
-  mensagem += "\n👤 Cliente: " + nome;
-  mensagem += "\n📍 Endereço: " + endereco;
+  mensagem += "━━━━━━━━━━━━━━━\n";
+  mensagem += "💰 Total: " + total + " Kz\n";
+  mensagem += "━━━━━━━━━━━━━━━\n";
+  mensagem += "👤 Cliente: " + nome + "\n";
+  mensagem += "📍 Endereço: " + endereco + "\n\n";
+  mensagem += "🚀 Obrigado pela preferência!\n";
+  mensagem += "📞 Contacto: 928363335";
 
   let url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
 
