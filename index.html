@@ -316,17 +316,17 @@ function enviarPedido(){
     let nome = document.getElementById("nome").value;
     let endereco = document.getElementById("endereco").value;
 
-    let mensagem = "🛒 Pedido ArtenaShop:\n";
+    let mensagem = "🛒 *Pedido ArtenaShop*\n\n";
     let total = 0;
 
     carrinho.forEach(item => {
-        mensagem += "- " + item.nome + " (" + item.preco + " Kz)\n";
+        mensagem += "• " + item.nome + " - *" + item.preco + " Kz*\n";
         total += item.preco;
     });
 
-    mensagem += "\n💰 Total: " + total + " Kz";
-    mensagem += "\n👤 Nome: " + nome;
-    mensagem += "\n📍 Endereço: " + endereco;
+    mensagem += "\n💰 *Total:* " + total + " Kz*";
+    mensagem += "\n👤 *Nome:* " + nome;
+    mensagem += "\n📍 *Endereço:* " + endereco;
 
     const url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
 
