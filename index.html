@@ -225,6 +225,14 @@ Adicionar ao carrinho
 </div>
       <script>
 let carrinho = [];
+      function finalizarPedido(){
+    if (carrinho.length === 0){
+        alert("Carrinho vazio!");
+        return;
+    }
+
+    document.getElementById("formulario").style.display = "block";
+}  
 
 // Adicionar produto
 function adicionar(nome, preco){
@@ -292,43 +300,6 @@ function mostrarMensagem(){
         msg.remove();
     }, 3000);
 }
-
-// FINALIZAR PEDIDO + WHATSAPP
-function finalizarPedido(){
-
-    if (carrinho.length === 0){
-        alert("Carrinho vazio!");
-        return;
-    }
-
-    // 👇 pedir dados do cliente
-    let nome = prompt("Qual é o seu nome?");
-    if (!nome) return;
-
-    let endereco = prompt("Qual é o seu endereço?");
-    if (!endereco) return;
-
-    mostrarMensagem();
-
-    let mensagem = "🛒 *Pedido ArtenaShop*\n\n";
-    let total = 0;
-
-    carrinho.forEach(item => {
-        mensagem += "• " + item.nome + " - *" + item.preco + " Kz*\n";
-        total += item.preco;
-    });
-
-    mensagem += "\n💰 *Total: " + total + " Kz*\n\n";
-    mensagem += "👤 Nome: " + nome + "\n";
-    mensagem += "📍 Endereço: " + endereco;
-
-    const url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
-
-    setTimeout(() => {
-        window.open(url, "_blank");
-    }, 1000);
-carrinho = [];
-atualizarCarrinho();
 
   function finalizarPedido(){
     if (carrinho.length === 0){
