@@ -144,7 +144,6 @@
 
 <div style="display:flex; flex-wrap:wrap; justify-content:center;">
 
-<!-- PRODUTOS -->
 <script>
 let produtos = [
 ["Perfume Premium",15000,"perfume.jpg"],
@@ -185,10 +184,30 @@ document.write(produtos.map(p=>`
 <h2 style="padding:10px;">📊 Pedidos</h2>
 <div id="lista-pedidos"></div>
 
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCjMXkLRne-AIP18eNYLy8rKSEAyXxkYGo",
+  authDomain: "artenashop-971fa.firebaseapp.com",
+  projectId: "artenashop-971fa",
+  storageBucket: "artenashop-971fa.firebasestorage.app",
+  messagingSenderId: "103649440227",
+  appId: "1:103649440227:web:07c545ef3b8932f22ff0d6",
+  measurementId: "G-S5VY5SCBGV"
+};
+
+const app = initializeApp(firebaseConfig);
+window.db = getFirestore(app);
+window.addDoc = addDoc;
+window.collection = collection;
+</script>
+
 <script>
 let carrinho = [];
 
-// salvar carrinho
 function salvarCarrinho(){
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
 }
@@ -201,7 +220,6 @@ function carregarCarrinho(){
   }
 }
 
-// carrinho
 function adicionar(nome, preco){
   carrinho.push({nome, preco});
   atualizarCarrinho();
@@ -242,7 +260,6 @@ function atualizarCarrinho(){
   contador.innerText=carrinho.length;
 }
 
-// abrir fechar
 function abrirCarrinho(){
   document.getElementById("carrinho").style.right="0";
 }
@@ -250,7 +267,6 @@ function fecharCarrinho(){
   document.getElementById("carrinho").style.right="-100%";
 }
 
-// pedido
 function finalizarPedido(){
   if(carrinho.length==0){
     alert("Carrinho vazio!");
@@ -264,14 +280,11 @@ function enviarPedido(){
   let endereco = document.getElementById("endereco").value;
 
   let numeroPedido = Math.floor(Math.random() * 100000);
-
   let data = new Date();
   let dataFormatada = data.toLocaleDateString();
   let horaFormatada = data.toLocaleTimeString();
 
   let total = 0;
-
-  // AGRUPAR PRODUTOS (quantidade)
   let resumo = {};
 
   carrinho.forEach(item => {
@@ -281,56 +294,52 @@ function enviarPedido(){
     } else {
       resumo[item.nome] = {
         qtd: 1,
-        preco: item.preco,
         total: item.preco
       };
     }
   });
 
-  // FORMATAR PREÇO
   function formatar(valor){
     return valor.toLocaleString("pt-BR");
   }
 
   let msg = "🛒 *NOVO PEDIDO - ArtenaShop*\n";
   msg += "━━━━━━━━━━━━━━━\n";
-  msg += "📦 *Pedido Nº:* " + numeroPedido + "\n";
-  msg += "📅 *Data:* " + dataFormatada + "\n";
-  msg += "⏰ *Hora:* " + horaFormatada + "\n\n";
-
-  msg += "🛍️ *Itens do Pedido:*\n\n";
+  msg += "📦 Pedido Nº: " + numeroPedido + "\n";
+  msg += "📅 Data: " + dataFormatada + "\n";
+  msg += "⏰ Hora: " + horaFormatada + "\n\n";
+  msg += "🛍️ Itens:\n\n";
 
   for(let nomeProduto in resumo){
     let item = resumo[nomeProduto];
-
-    msg += `• ${item.qtd}x ${nomeProduto}\n`;
-    msg += `   💵 ${formatar(item.total)} Kz\n\n`;
-
+    msg += `• ${item.qtd}x ${nomeProduto} — ${formatar(item.total)} Kz\n\n`;
     total += item.total;
   }
 
   msg += "━━━━━━━━━━━━━━━\n";
-  msg += "💰 *Total:* " + formatar(total) + " Kz\n";
+  msg += "💰 Total: " + formatar(total) + " Kz\n";
   msg += "━━━━━━━━━━━━━━━\n\n";
-
-  msg += "👤 *Cliente:* " + nome + "\n";
-  msg += "📍 *Endereço:* " + endereco + "\n\n";
-
+  msg += "👤 Cliente: " + nome + "\n";
+  msg += "📍 Endereço: " + endereco + "\n\n";
   msg += "🚀 Obrigado pela preferência!\n";
-  msg += "📞 *Contacto:* 928363335\n";
-  msg += "📌 *Observação:* Entraremos em contacto em breve.";
+  msg += "📞 Contacto: 928363335\n";
+  msg += "📌 Entraremos em contacto em breve.";
 
+  // WhatsApp
   window.open("https://wa.me/244928363335?text=" + encodeURIComponent(msg));
 
-  // guardar pedidos
-  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
-  pedidos.push({
+  // FIREBASE
+  addDoc(collection(db, "pedidos"), {
     id: numeroPedido,
     nome,
+    endereco,
     total,
     data: dataFormatada + " " + horaFormatada
   });
 
+  // localStorage
+  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+  pedidos.push({id: numeroPedido, nome, total, data: dataFormatada});
   localStorage.setItem("pedidos", JSON.stringify(pedidos));
 
   carrinho = [];
@@ -341,7 +350,6 @@ function enviarPedido(){
   carregarPedidos();
 }
 
-// dashboard
 function carregarPedidos(){
   let pedidos=JSON.parse(localStorage.getItem("pedidos"))||[];
   let lista=document.getElementById("lista-pedidos");
@@ -358,10 +366,8 @@ function carregarPedidos(){
   });
 }
 
-// iniciar
 carregarCarrinho();
 carregarPedidos();
-
 </script>
 
 </body>
