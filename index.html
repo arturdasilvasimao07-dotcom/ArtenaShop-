@@ -2,47 +2,122 @@
 <html>
 <head>
   <title>ArtenaShop</title>
-  <style>
-    .btn-limpar {
-    background: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 10px 0;
-    font-weight: bold;
-}
 
-.btn-limpar:hover {
-    background: #cc0000;
-}
+  <style>
+    body{
+      font-family: Arial;
+      background:#f5f5f5;
+      margin:0;
+      padding-top:100px;
+    }
+
+    .produto{
+      background:white;
+      width:250px;
+      margin:10px;
+      padding:15px;
+      border-radius:10px;
+      box-shadow:0 5px 10px rgba(0,0,0,0.1);
+      text-align:center;
+    }
+
+    .produto img{
+      width:100%;
+      border-radius:10px;
+    }
+
+    .btn{
+      background:#27ae60;
+      color:white;
+      padding:10px;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+    }
+
+    .btn-limpar{
+      background:#ff4d4d;
+      color:white;
+      border:none;
+      padding:10px 15px;
+      border-radius:8px;
+      cursor:pointer;
+      margin:10px;
+      font-weight:bold;
+    }
+
+    .btn-limpar:hover{
+      background:#cc0000;
+    }
+
+    #painel-carrinho{
+      position:fixed;
+      top:0;
+      right:-100%;
+      width:300px;
+      height:100%;
+      background:white;
+      box-shadow:-5px 0 15px rgba(0,0,0,0.3);
+      padding:15px;
+      transition:0.3s;
+      z-index:999;
+    }
+
+    #botao-carrinho{
+      position:fixed;
+      top:10px;
+      right:10px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      padding:10px 15px;
+      border-radius:20px;
+      z-index:1000;
+      cursor:pointer;
+    }
+
+    #finalizar-btn{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#27ae60;
+      color:white;
+      padding:15px 20px;
+      border:none;
+      border-radius:50px;
+      font-size:16px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.3);
+      cursor:pointer;
+    }
+
+    #formulario{
+      display:none;
+      position:fixed;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      background:white;
+      padding:20px;
+      border-radius:10px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.3);
+      z-index:3000;
+    }
   </style>
 </head>
 
-<body style="font-family: Arial; background:#f5f5f5; margin:0; padding-top:150px">
-  <div id="painel-carrinho" style="
-position:fixed;
-top:0;
-right:-100%;
-width:300px;
-height:100%;
-background:white;
-box-shadow:-5px 0 15px rgba(0,0,0,0.3);
-padding:15px;
-transition:0.3s;
-z-index:999;
-">
+<body>
+
+<!-- BOTÃO CARRINHO -->
+<button id="botao-carrinho" onclick="abrirCarrinho()">
+🛒 (<span id="contador">0</span>)
+</button>
+
+<!-- CARRINHO -->
+<div id="painel-carrinho">
 
 <h2>🛒 Carrinho</h2>
 
-<button onclick="fecharCarrinho()" style="
-background:red;
-color:white;
-border:none;
-padding:5px 10px;
-border-radius:5px;
-">
+<button onclick="fecharCarrinho()" class="btn-limpar">
 Fechar ❌
 </button>
 
@@ -52,290 +127,169 @@ Fechar ❌
 
 <p><b>Total: <span id="total">0</span> Kz</b></p>
 
-<button onclick="finalizar()" style="
-background:#27ae60;
-color:white;
-border:none;
-padding:10px;
-width:100%;
-border-radius:5px;
-">
+<button onclick="finalizarPedido()" class="btn">
 Finalizar Pedido
 </button>
 
 </div>
-  <button onclick="abrirCarrinho()" style="
-position:fixed;
-top:10px;
-right:10px;
-background:#27ae60;
-color:white;
-border:none;
-padding:10px 15px;
-border-radius:20px;
-z-index:1000;
-">
-🛒 (<span id="contador">0</span>)
-</button>
-  <div id="carrinho-box" style="
-position:fixed;
-top:0;
-left:0;
-width:100%;
-background:#111;
-color:white;
-padding:10px;
-z-index:999;
-height:120px;
-overflow-y:auto;
-display:none;
-    
-">
 
-<h3>🛒 Carrinho (<span id="contador">0</span>)</h3>
-
-<div id="lista-carrinho"></div>
-
-<p><b>Total: <span id="total">0</span> Kz</b></p>
-
+<!-- TOPO -->
+<div style="text-align:center; padding:20px;">
+  <h1>🛍️ ArtenaShop</h1>
+  <p>Loja online de cosméticos, perfumes e tecnologia</p>
 </div>
 
-<br><br><br><br><br><br>
+<!-- PRODUTOS -->
+<div style="display:flex; flex-wrap:wrap; justify-content:center;">
 
-  <!-- TOPO -->
-  <div style="text-align:center; padding:20px;">
-    <img src="8EA06E2D-D680-4B81-A5BE-98623B87500B.png" style="width:100px;">
-    <h1>🛍️ ArtenaShop</h1>
-    <p>Loja online de cosméticos, perfumes e tecnologia</p>
+  <div class="produto">
+    <img src="perfume.jpg">
+    <h3>Perfume Premium</h3>
+    <p><b>15000 Kz</b></p>
+    <button class="btn" onclick="adicionar('Perfume Premium',15000)">Adicionar</button>
   </div>
 
-  <!-- PRODUTOS -->
-  <div style="display:flex; flex-wrap:wrap; justify-content:center;">
+  <div class="produto">
+    <img src="kit.jpg">
+    <h3>Kit Cosmético</h3>
+    <p><b>12000 Kz</b></p>
+    <button class="btn" onclick="adicionar('Kit Cosmético',12000)">Adicionar</button>
+  </div>
 
-    <!-- PRODUTO 1 -->
-    <div style="background:white; width:250px; margin:10px; padding:15px; border-radius:10px; box-shadow:0 5px 10px rgba(0,0,0,0.1); text-align:center;">
-      <img src="perfume.jpg" style="width:100%; border-radius:10px;">
-      <h3>Perfume Premium</h3>
-      <p><b>15.000 Kz</b></p>
-      <button onclick="adicionar('perfume premium',15.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-Adicionar ao carrinho
-</button>
-    </div>
+  <div class="produto">
+    <img src="fone.jpg">
+    <h3>Fone Bluetooth</h3>
+    <p><b>8000 Kz</b></p>
+    <button class="btn" onclick="adicionar('Fone Bluetooth',8000)">Adicionar</button>
+  </div>
 
-    <!-- PRODUTO 2 -->
-    <div style="background:white; width:250px; margin:10px; padding:15px; border-radius:10px; box-shadow:0 5px 10px rgba(0,0,0,0.1); text-align:center;">
-      <img src="kit.jpg" style="width:100%; border-radius:10px;">
-      <h3>Kit Cosmético</h3>
-      <p><b>12.000 Kz</b></p>
-      <button onclick="adicionar('kit cosmeticos',12.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-Adicionar ao carrinho
-</button>
-    </div>
+  <div class="produto">
+    <img src="relogio.jpg">
+    <h3>Relógio Digital</h3>
+    <p><b>20000 Kz</b></p>
+    <button class="btn" onclick="adicionar('Relógio Digital',20000)">Adicionar</button>
+  </div>
 
-    <!-- PRODUTO 3 -->
-    <div style="background:white; width:250px; margin:10px; padding:15px; border-radius:10px; box-shadow:0 5px 10px rgba(0,0,0,0.1); text-align:center;">
-      <img src="fone.jpg" style="width:100%; border-radius:10px;">
-      <h3>Fone Bluetooth</h3>
-      <p><b>8.000 Kz</b></p>
-      <button onclick="adicionar('fone bluetooth', 8.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-Adicionar ao carrinho
-</button>
-    </div>
-<!-- PRODUTO 4 -->
-<div style="background:white; width:250px; margin:10px; padding:15px; border-radius:10px; box-shadow:0 5px 10px rgba(0,0,0,0.1); text-align:center;">
-  <img src="creme.jpg" style="width:100%; border-radius:10px;">
-  <h3>Creme Facial</h3>
-  <p><b>7.000 Kz</b></p>
-  <button onclick="adicionar('creme facial', 7.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-Adicionar ao carrinho
-</button>
 </div>
 
-<!-- PRODUTO 5 -->
-<div style="background:white; width:250px; margin:10px; padding:15px; border-radius:10px; box-shadow:0 5px 10px rgba(0,0,0,0.1); text-align:center;">
-  <img src="relogio.jpg" style="width:100%; border-radius:10px;">
-  <h3>Relógio Digital</h3>
-  <p><b>20.000 Kz</b></p>
-  <button onclick="adicionar('relogio digital', 20.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-Adicionar ao carrinho
+<!-- BOTÃO FINAL -->
+<button id="finalizar-btn" onclick="finalizarPedido()">
+Finalizar 🛒
 </button>
-</div>
 
-<!-- PRODUTO 6 -->
-<div style="background:white; width:250px; margin:10px; padding:15px; border-radius:10px; box-shadow:0 5px 10px rgba(0,0,0,0.1); text-align:center;">
-  <img src="chuteira.jpg" style="width:100%; border-radius:10px;">
-  <h3>chuteira pretator</h3>
-  <p><b>9.000 Kz</b></p>
-  <button onclick="adicionar('chuteira pretator', 9.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-Adicionar ao carrinho
-</button>
-</div>
-
-<!-- PRODUTO 7 -->
-<div style="background:white; width:250px; margin:10px; padding:15px; border-radius:10px; box-shadow:0 5px 10px rgba(0,0,0,0.1); text-align:center;">
-  <img src="perfume.jpg" style="width:100%; border-radius:10px;">
-  <h3>Perfume Luxo</h3>
-  <p><b>18.000 Kz</b></p>
-<button onclick="adicionar('perfume luxo', 18.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-Adicionar ao carrinho
-</button>
-</div>
-
-<!-- PRODUTO 8 -->
-<div style="background:white; width:250px; margin:10px; padding:15px; border-radius:10px; box-shadow:0 5px 10px rgba(0,0,0,0.1); text-align:center;">
-  <img src="bolsa.jpg" style="width:100%; border-radius:10px;">
-  <h3>Bolsa Feminina</h3>
-  <p><b>14.000 Kz</b></p>
-  <button onclick="adicionar('bolsa femenina', 14.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-Adicionar ao carrinho
-</button>
-</div>
-
-<!-- PRODUTO 9 -->
-<div style="background:white; width:250px; margin:10px; padding:15px; border-radius:10px; box-shadow:0 5px 10px rgba(0,0,0,0.1); text-align:center;">
-  <img src="smartwtch.jpg" style="width:100%; border-radius:10px;">
-  <h3>Smartwatch</h3>
-  <p><b>25.000 Kz</b></p>
-  <button onclick="adicionar('smartwatch', 25.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-Adicionar ao carrinho
-</button>
-</div>
-
-<!-- PRODUTO 10 -->
-<div style="background:white; width:250px; margin:10px; padding:15px; border-radius:10px; box-shadow:0 5px 10px rgba(0,0,0,0.1); text-align:center;">
-  <img src="caixa de som.jpg" style="width:100%; border-radius:10px;">
-  <h3>Caixa de Som Bluetooth</h3>
-  <p><b>11.000 Kz</b></p>
-  <button onclick="adicionar('caixa de som bluetooth', 11.000)" style="background:#27ae60; color:white; padding:10px; border:none; border-radius:5px;">
-Adicionar ao carrinho
-</button>
-</div>
-
-    <button onclick="finalizarPedido()" style="
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#27ae60;
-  color:white;
-  padding:15px 20px;
-  border:none;
-  border-radius:50px;
-  font-size:16px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.3);    
-">
-      Finalizar pedido 🛒
-    </button>
-
-    <div id="formulario" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:20px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.3); z-index:3000;">
-
+<!-- FORMULÁRIO -->
+<div id="formulario">
   <h3>Finalizar Pedido</h3>
 
   <input id="nome" placeholder="Seu nome" style="width:100%; margin-bottom:10px; padding:10px;">
-  
   <input id="endereco" placeholder="Seu endereço" style="width:100%; margin-bottom:10px; padding:10px;">
 
-  <button onclick="enviarPedido()" style="background:#27ae60; color:white; padding:10px; border:none; width:100%;">
-    
+  <button onclick="enviarPedido()" class="btn">
     Enviar para WhatsApp
   </button>
 </div>
-    <h2>📦 Meus Pedidos</h2>
-<div id="lista-pedidos"> 
-</div>
-    
+
+<!-- PEDIDOS -->
+<h2 style="text-align:center;">📦 Meus Pedidos</h2>
+<div id="lista-pedidos" style="padding:10px;"></div>
+
 <button onclick="limparHistorico()" class="btn-limpar">
 🗑 Limpar Histórico
 </button>
-    <script>
+
+<!-- SCRIPT -->
+<script>
+
 let carrinho = [];
 
-// adicionar produto
+// adicionar
 function adicionar(nome, preco){
-    carrinho.push({nome, preco});
-    atualizarCarrinho();
+  carrinho.push({nome, preco});
+  atualizarCarrinho();
 }
 
-// remover produto
+// remover
 function remover(index){
-    carrinho.splice(index, 1);
-    atualizarCarrinho();
+  carrinho.splice(index,1);
+  atualizarCarrinho();
 }
 
-// atualizar carrinho
+// atualizar
 function atualizarCarrinho(){
-    let lista = document.getElementById("lista-carrinho");
-    let contador = document.getElementById("contador");
-    let totalEl = document.getElementById("total");
+  let lista = document.getElementById("lista-carrinho");
+  let contador = document.getElementById("contador");
+  let totalEl = document.getElementById("total");
 
-    lista.innerHTML = "";
-    let soma = 0;
+  lista.innerHTML = "";
+  let soma = 0;
 
-    carrinho.forEach((item, index) => {
-        soma += item.preco;
+  carrinho.forEach((item, index)=>{
+    soma += item.preco;
 
-        lista.innerHTML += `
-        <div>
-            ${item.nome} - ${item.preco} Kz
-            <button onclick="remover(${index})">❌</button>
-        </div>
-        `;
-    });
+    lista.innerHTML += `
+      <div>
+        ${item.nome} - ${item.preco} Kz
+        <button onclick="remover(${index})">❌</button>
+      </div>
+    `;
+  });
 
-    contador.innerText = carrinho.length;
-    totalEl.innerText = soma;
+  contador.innerText = carrinho.length;
+  totalEl.innerText = soma;
 }
 
 // abrir carrinho
 function abrirCarrinho(){
-    document.getElementById("painel-carrinho").style.right = "0";
+  document.getElementById("painel-carrinho").style.right = "0";
 }
 
-// fechar carrinho
+// fechar
 function fecharCarrinho(){
-    document.getElementById("painel-carrinho").style.right = "-100%";
+  document.getElementById("painel-carrinho").style.right = "-100%";
 }
 
-// finalizar pedido
+// finalizar
 function finalizarPedido(){
-    if(carrinho.length === 0){
-        alert("Carrinho vazio!");
-        return;
-    }
-    document.getElementById("formulario").style.display = "block";
+  if(carrinho.length === 0){
+    alert("Carrinho vazio!");
+    return;
+  }
+  document.getElementById("formulario").style.display = "block";
 }
 
-// enviar pedido
+// enviar
 function enviarPedido(){
-    let nome = document.getElementById("nome").value;
-    let endereco = document.getElementById("endereco").value;
+  let nome = document.getElementById("nome").value;
+  let endereco = document.getElementById("endereco").value;
 
-    let total = 0;
-    let mensagem = "🛒 Pedido:\n";
+  let total = 0;
+  let mensagem = "🛒 Pedido:\n";
 
-    carrinho.forEach(item => {
-        mensagem += `${item.nome} - ${item.preco} Kz\n`;
-        total += item.preco;
-    });
+  carrinho.forEach(item=>{
+    mensagem += `${item.nome} - ${item.preco} Kz\n`;
+    total += item.preco;
+  });
 
-    mensagem += `Total: ${total} Kz\n`;
-    mensagem += `Cliente: ${nome}\nEndereço: ${endereco}`;
+  mensagem += `Total: ${total} Kz\n`;
+  mensagem += `Cliente: ${nome}\nEndereço: ${endereco}`;
 
-    let url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
+  let url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
 
-    window.open(url, "_blank");
+  window.open(url, "_blank");
 
-    carrinho = [];
-    atualizarCarrinho();
+  carrinho = [];
+  atualizarCarrinho();
 
-    document.getElementById("formulario").style.display = "none";
+  document.getElementById("formulario").style.display = "none";
 }
 
 // limpar histórico
 function limparHistorico(){
-    localStorage.removeItem("pedidos");
-    document.getElementById("lista-pedidos").innerHTML = "";
+  localStorage.removeItem("pedidos");
+  document.getElementById("lista-pedidos").innerHTML = "";
 }
+
 </script>
- 
+
 </body>
 </html>
