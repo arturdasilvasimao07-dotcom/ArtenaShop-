@@ -209,6 +209,20 @@ Adicionar ao carrinho
 ">
       Finalizar pedido 🛒
     </button>
+
+    <div id="formulario" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:20px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.3); z-index:3000;">
+
+  <h3>Finalizar Pedido</h3>
+
+  <input id="nome" placeholder="Seu nome" style="width:100%; margin-bottom:10px; padding:10px;">
+  
+  <input id="endereco" placeholder="Seu endereço" style="width:100%; margin-bottom:10px; padding:10px;">
+
+  <button onclick="enviarPedido()" style="background:#27ae60; color:white; padding:10px; border:none; width:100%;">
+    Enviar para WhatsApp
+  </button>
+
+</div>
       <script>
 let carrinho = [];
 
@@ -315,6 +329,42 @@ function finalizarPedido(){
     }, 1000);
 carrinho = [];
 atualizarCarrinho();
+
+  function finalizarPedido(){
+    if (carrinho.length === 0){
+        alert("Carrinho vazio!");
+        return;
+    }
+
+    document.getElementById("formulario").style.display = "block";
+}
+
+
+function enviarPedido(){
+
+    let nome = document.getElementById("nome").value;
+    let endereco = document.getElementById("endereco").value;
+
+    let mensagem = "🛒 Pedido ArtenaShop:\n";
+    let total = 0;
+
+    carrinho.forEach(item => {
+        mensagem += "- " + item.nome + " (" + item.preco + " Kz)\n";
+        total += item.preco;
+    });
+
+    mensagem += "\n💰 Total: " + total + " Kz";
+    mensagem += "\n👤 Nome: " + nome;
+    mensagem += "\n📍 Endereço: " + endereco;
+
+    const url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
+
+    window.open(url, "_blank");
+
+    carrinho = [];
+    atualizarCarrinho();
+
+    document.getElementById("formulario").style.display = "none";
 }
 
 </script>
