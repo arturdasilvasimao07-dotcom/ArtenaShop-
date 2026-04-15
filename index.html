@@ -219,10 +219,13 @@ Adicionar ao carrinho
   <input id="endereco" placeholder="Seu endereço" style="width:100%; margin-bottom:10px; padding:10px;">
 
   <button onclick="enviarPedido()" style="background:#27ae60; color:white; padding:10px; border:none; width:100%;">
+    
     Enviar para WhatsApp
   </button>
-
 </div>
+    <h2>📦 Meus Pedidos</h2>
+<div id="lista-pedidos"></div>
+    <button onclick="limparPedidos()">🗑️ Limpar Histórico</button>
       <script>
 let carrinho = [];
       function finalizarPedido(){
@@ -349,6 +352,21 @@ mensagem += "\n📞 *Contacto:* 928363335";
 mensagem += "\n\n📌 *Observação:* Entraremos em contacto em breve.";
 
 let url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
+let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+let novoPedido = {
+    id: numeroPedido,
+    nome: nome,
+    endereco: endereco,
+    itens: carrinho,
+    total: total,
+    data: dataFormatada,
+    hora: horaFormatada
+};
+
+pedidos.push(novoPedido);
+
+localStorage.setItem("pedidos", JSON.stringify(pedidos));
 
     window.open(url, "_blank");
 
@@ -356,6 +374,32 @@ let url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
     atualizarCarrinho();
 
     document.getElementById("formulario").style.display = "none";
+function carregarPedidos(){
+    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+    let lista = document.getElementById("lista-pedidos");
+
+    lista.innerHTML = "";
+
+    pedidos.forEach(pedido => {
+        let div = document.createElement("div");
+
+        div.style.background = "#fff";
+        div.style.padding = "10px";
+        div.style.marginBottom = "10px";
+        div.style.borderRadius = "10px";
+
+        div.innerHTML = `
+            <strong>Pedido Nº:</strong> ${pedido.id}<br>
+            <strong>Cliente:</strong> ${pedido.nome}<br>
+            <strong>Total:</strong> ${pedido.total} Kz<br>
+            <strong>Data:</strong> ${pedido.data} ${pedido.hora}
+        `;
+
+        lista.appendChild(div);
+    });
+function limparPedidos(){
+    localStorage.removeItem("pedidos");
+    carregarPedidos();
 }
 
 </script>
