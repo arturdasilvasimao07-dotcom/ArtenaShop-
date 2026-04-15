@@ -212,101 +212,101 @@ Adicionar ao carrinho
       <script>
 let carrinho = [];
 
+// Adicionar produto
 function adicionar(nome, preco){
-  carrinho.push({nome, preco});
-  atualizarCarrinho();
+    carrinho.push({nome, preco});
+    atualizarCarrinho();
 }
 
+// Remover produto
 function remover(index){
-  carrinho.splice(index, 1);
-  atualizarCarrinho();
+    carrinho.splice(index, 1);
+    atualizarCarrinho();
 }
 
+// Atualizar carrinho na tela
 function atualizarCarrinho(){
-  let lista = document.getElementById("lista-carrinho");
-  let contador = document.getElementById("contador");
-  let total = document.getElementById("total");
+    let lista = document.getElementById("lista-carrinho");
+    let contador = document.getElementById("contador");
+    let totalEl = document.getElementById("total");
 
-  lista.innerHTML = "";
-  let soma = 0;
+    if (!lista) return;
 
-  carrinho.forEach((item, index) => {
-    soma += item.preco;
+    lista.innerHTML = "";
+    let soma = 0;
 
-    lista.innerHTML += `
-      <div style="margin-bottom:5px;">
-        ${item.nome} - ${item.preco} Kz
-        <button onclick="remover(${index})" style="color:red;">❌</button>
-      </div>
-    `;
-  });
+    carrinho.forEach((item, index) => {
+        soma += item.preco;
 
-  contador.innerText = carrinho.length;
-  total.innerText = soma;
+        lista.innerHTML += `
+            <div style="margin-bottom:5px;">
+                ${item.nome} - ${item.preco} Kz
+                <button onclick="remover(${index})">❌</button>
+            </div>
+        `;
+    });
+
+    if (contador) contador.innerText = carrinho.length;
+    if (totalEl) totalEl.innerText = soma;
 }
 
-function finalizar(){
-  let mensagem = "Pedido ArtenaShop:%0A";
-  let total = 0;
-
-  carrinho.forEach(item => {
-    mensagem += "- " + item.nome + " (" + item.preco + " Kz)%0A";
-    total += item.preco;
-  });
-
-  mensagem += "%0ATotal: " + total + " Kz";
-
-  window.open("https://wa.me/244928363335?text=" + mensagem);
-}
-
-function abrirCarrinho(){
-  document.getElementById("carrinho-box").style.display = "block";
-}
-
-function fecharCarrinho(){
-  document.getElementById("carrinho-box").style.display = "none";
-}    
+// Mostrar mensagem bonita
 function mostrarMensagem(){
-  // remove mensagens antigas
-  const antiga = document.getElementById("msg-sucesso");
-  if (antiga) antiga.remove();
+    // Remove antiga se existir
+    const antiga = document.getElementById("msg-sucesso");
+    if (antiga) antiga.remove();
 
-  const msg = document.createElement("div");
-  msg.id = "msg-sucesso";
+    const msg = document.createElement("div");
+    msg.id = "msg-sucesso";
 
-  msg.innerHTML = "✅ Pedido enviado com sucesso!";
+    msg.innerHTML = "✅ Pedido enviado com sucesso!";
 
-  msg.style.position = "fixed";
-  msg.style.top = "50%";
-  msg.style.left = "50%";
-  msg.style.transform = "translate(-50%, -50%)";
-  msg.style.background = "#27ae60";
-  msg.style.color = "white";
-  msg.style.padding = "20px";
-  msg.style.borderRadius = "10px";
-  msg.style.zIndex = "2000";
+    msg.style.position = "fixed";
+    msg.style.top = "50%";
+    msg.style.left = "50%";
+    msg.style.transform = "translate(-50%, -50%)";
+    msg.style.background = "#27ae60";
+    msg.style.color = "white";
+    msg.style.padding = "20px";
+    msg.style.borderRadius = "10px";
+    msg.style.zIndex = "2000";
 
-  document.body.appendChild(msg);
+    document.body.appendChild(msg);
 
-  setTimeout(() => {
-    msg.remove();
-  }, 3000);
+    // desaparecer depois de 3s
+    setTimeout(() => {
+        msg.remove();
+    }, 3000);
 }
-    function finalizarPedido(){
-  mostrarMensagem(); // mostra a mensagem bonita
 
-  const numero = "244928363335"; 
+// FINALIZAR PEDIDO + WHATSAPP
+function finalizarPedido(){
 
-  const mensagem = "Olá, quero finalizar meu pedido na ArtenaShop 🛒";
+    if (carrinho.length === 0){
+        alert("Carrinho vazio!");
+        return;
+    }
 
-  const url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensagem);
+    mostrarMensagem();
 
-  setTimeout(() => {
-    window.open(url, "_blank");
-  }, 1000);
-}    
-        
+    let mensagem = "🛒 Pedido ArtenaShop:%0A";
+    let total = 0;
+
+    carrinho.forEach(item => {
+        mensagem += "- " + item.nome + " (" + item.preco + " Kz)%0A";
+        total += item.preco;
+    });
+
+    mensagem += "%0ATotal: " + total + " Kz";
+
+    const url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
+
+    // abre whatsapp depois de 1s
+    setTimeout(() => {
+        window.open(url, "_blank");
+    }, 1000);
+}
 </script>
-🛒 
+ 
 </body>
 </html>
