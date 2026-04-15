@@ -260,31 +260,54 @@ function finalizarPedido(){
 }
 
 function enviarPedido(){
-  let nome=document.getElementById("nome").value;
-  let endereco=document.getElementById("endereco").value;
+  let nome = document.getElementById("nome").value;
+  let endereco = document.getElementById("endereco").value;
 
-  let total=0;
-  let msg="🛒 *NOVO PEDIDO - ArtenaShop*\n\n";
+  let numeroPedido = Math.floor(Math.random() * 100000);
+
+  let data = new Date();
+  let dataFormatada = data.toLocaleDateString();
+  let horaFormatada = data.toLocaleTimeString();
+
+  let total = 0;
+
+  let msg = "🛒 *NOVO PEDIDO - ArtenaShop*\n";
+  msg += "━━━━━━━━━━━━━━━\n";
+  msg += "📦 *Pedido Nº:* " + numeroPedido + "\n";
+  msg += "📅 *Data:* " + dataFormatada + "\n";
+  msg += "⏰ *Hora:* " + horaFormatada + "\n\n";
+
+  msg += "🛍️ *Itens:*\n\n";
 
   carrinho.forEach(item=>{
-    msg+="• "+item.nome+" — "+item.preco+" Kz\n";
-    total+=item.preco;
+    msg += "• " + item.nome + " — " + item.preco + " Kz\n\n";
+    total += item.preco;
   });
 
-  msg+="\n💰 Total: "+total+" Kz";
-  msg+="\n👤 "+nome;
-  msg+="\n📍 "+endereco;
-  msg+= "\n📞 *Contacto:* 928363335";
-  msg+= "\n\n📌 *Observação:* Entraremos em contacto em breve.";
+  msg += "━━━━━━━━━━━━━━━\n";
+  msg += "💰 *Total: " + total + " Kz*\n";
+  msg += "━━━━━━━━━━━━━━━\n";
 
-  window.open("https://wa.me/244928363335?text="+encodeURIComponent(msg));
+  msg += "👤 *Cliente:* " + nome + "\n";
+  msg += "📍 *Endereço:* " + endereco + "\n\n";
+
+  msg += "🚀 Obrigado pela preferência!\n";
+  msg += "📞 *Contacto:* 928363335\n";
+  msg += "📌 *Entraremos em contacto em breve.*";
+
+  window.open("https://wa.me/244928363335?text=" + encodeURIComponent(msg));
 
   // guardar pedidos
-  let pedidos=JSON.parse(localStorage.getItem("pedidos"))||[];
-  pedidos.push({nome,total,data:new Date().toLocaleString()});
-  localStorage.setItem("pedidos",JSON.stringify(pedidos));
+  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+  pedidos.push({
+    nome,
+    total,
+    data: dataFormatada + " " + horaFormatada
+  });
 
-  carrinho=[];
+  localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+  carrinho = [];
   atualizarCarrinho();
   salvarCarrinho();
   document.getElementById("formulario").style.display="none";
