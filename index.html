@@ -2,6 +2,22 @@
 <html>
 <head>
   <title>ArtenaShop</title>
+  <style>
+    .btn-limpar {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.btn-limpar:hover {
+    background: #cc0000;
+}
+  </style>
 </head>
 
 <body style="font-family: Arial; background:#f5f5f5; margin:0; padding-top:150px">
@@ -225,7 +241,11 @@ Adicionar ao carrinho
 </div>
     <h2>📦 Meus Pedidos</h2>
 <div id="lista-pedidos"></div>
-    <button onclick="limparPedidos()">🗑️ Limpar Histórico</button>
+    
+<button onclick="limparHistorico()" class="btn-limpar">
+🗑 Limpar Histórico
+</button>
+    
       <script>
 let carrinho = [];
       function finalizarPedido(){
@@ -241,6 +261,9 @@ let carrinho = [];
 function adicionar(nome, preco){
     carrinho.push({nome, preco});
     atualizarCarrinho();
+  carrinho.push(produto);
+atualizarCarrinho();
+atualizarContadorCarrinho(); // 👈 ISSO AQUI
 }
 
 // Remover produto
@@ -308,6 +331,9 @@ function mostrarMensagem(){
     if (carrinho.length === 0){
         alert("Carrinho vazio!");
         return;
+      carrinho = [];
+atualizarCarrinho();
+atualizarContadorCarrinho(); // 👈 importante
     }
 
     document.getElementById("formulario").style.display = "block";
@@ -399,7 +425,10 @@ function carregarPedidos(){
     });
 function limparPedidos(){
     localStorage.removeItem("pedidos");
-    carregarPedidos();
+  
+    carregarPedidos();function atualizarContadorCarrinho() {
+    let contador = document.getElementById("contador-carrinho");
+    contador.innerText = carrinho.length;
 }
 
 </script>
