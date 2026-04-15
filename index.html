@@ -274,6 +274,8 @@ function enviarPedido(){
   msg+="\n💰 Total: "+total+" Kz";
   msg+="\n👤 "+nome;
   msg+="\n📍 "+endereco;
+  msg+= "\n📞 *Contacto:* 928363335";
+  msg+= "\n\n📌 *Observação:* Entraremos em contacto em breve.";
 
   window.open("https://wa.me/244928363335?text="+encodeURIComponent(msg));
 
@@ -305,8 +307,6 @@ function carregarPedidos(){
     Data: ${p.data}
     </div>`;
   });
-  mensagem += "\n📞 *Contacto:* 928363335";
-  mensagem += "\n\n📌 *Observação:* Entraremos em contacto em breve.";
 }
 
 // iniciar
