@@ -322,7 +322,7 @@ let data = new Date();
 let dataFormatada = data.toLocaleDateString();
 let horaFormatada = data.toLocaleTimeString();
 
-let mensagem = "🛒 *ArtenaShop - Novo Pedido*\n";
+let mensagem = "🛒 *NOVO PEDIDO - ArtenaShop*\n";
 mensagem += "━━━━━━━━━━━━━━━\n";
 mensagem += "📦 *Pedido Nº:* " + numeroPedido + "\n";
 mensagem += "📅 *Data:* " + dataFormatada + "\n";
@@ -333,8 +333,7 @@ mensagem += "🛍️ *Itens do Pedido:*\n";
 let total = 0;
 
 carrinho.forEach(item => {
-    mensagem += "• " + item.nome + "\n";
-    mensagem += "   💵 *" + item.preco + " Kz*\n\n";
+    mensagem += "• " + item.nome + " — 💵 *" + item.preco + " Kz*\n\n";
     total += item.preco;
 });
 
@@ -346,6 +345,8 @@ mensagem += "\n👤 *Cliente:* " + nome;
 mensagem += "\n📍 *Endereço:* " + endereco;
 
 mensagem += "\n\n🚀 Obrigado pela preferência!";
+mensagem += "\n📞 *Contacto:* 928363335";
+mensagem += "\n\n📌 *Observação:* Entraremos em contacto em breve.";
 
 let url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
 
