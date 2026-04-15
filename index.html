@@ -38,16 +38,11 @@
     .btn-limpar{
       background:#ff4d4d;
       color:white;
+      padding:10px;
       border:none;
-      padding:10px 15px;
       border-radius:8px;
-      cursor:pointer;
       margin:10px;
       font-weight:bold;
-    }
-
-    .btn-limpar:hover{
-      background:#cc0000;
     }
 
     #painel-carrinho{
@@ -57,8 +52,8 @@
       width:300px;
       height:100%;
       background:white;
-      box-shadow:-5px 0 15px rgba(0,0,0,0.3);
       padding:15px;
+      box-shadow:-5px 0 15px rgba(0,0,0,0.3);
       transition:0.3s;
       z-index:999;
     }
@@ -69,11 +64,10 @@
       right:10px;
       background:#27ae60;
       color:white;
+      padding:10px;
       border:none;
-      padding:10px 15px;
       border-radius:20px;
       z-index:1000;
-      cursor:pointer;
     }
 
     #finalizar-btn{
@@ -82,122 +76,114 @@
       right:20px;
       background:#27ae60;
       color:white;
-      padding:15px 20px;
+      padding:15px;
       border:none;
       border-radius:50px;
-      font-size:16px;
-      box-shadow:0 4px 15px rgba(0,0,0,0.3);
-      cursor:pointer;
-    }
-
-    #formulario{
-      display:none;
-      position:fixed;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      background:white;
-      padding:20px;
-      border-radius:10px;
-      box-shadow:0 4px 15px rgba(0,0,0,0.3);
-      z-index:3000;
     }
   </style>
 </head>
 
 <body>
 
-<!-- BOTÃO CARRINHO -->
+<!-- BOTÃO -->
 <button id="botao-carrinho" onclick="abrirCarrinho()">
 🛒 (<span id="contador">0</span>)
 </button>
 
 <!-- CARRINHO -->
 <div id="painel-carrinho">
-
 <h2>🛒 Carrinho</h2>
 
-<button onclick="fecharCarrinho()" class="btn-limpar">
-Fechar ❌
-</button>
+<button onclick="fecharCarrinho()" class="btn-limpar">Fechar</button>
 
 <hr>
 
 <div id="lista-carrinho"></div>
-
 <p><b>Total: <span id="total">0</span> Kz</b></p>
 
-<button onclick="finalizarPedido()" class="btn">
-Finalizar Pedido
-</button>
-
+<button onclick="finalizarPedido()" class="btn">Finalizar</button>
 </div>
 
 <!-- TOPO -->
 <div style="text-align:center; padding:20px;">
-  <h1>🛍️ ArtenaShop</h1>
-  <p>Loja online de cosméticos, perfumes e tecnologia</p>
+<h1>🛍️ ArtenaShop</h1>
+<p>Loja online de cosméticos, perfumes e tecnologia</p>
 </div>
 
 <!-- PRODUTOS -->
 <div style="display:flex; flex-wrap:wrap; justify-content:center;">
 
-  <div class="produto">
-    <img src="perfume.jpg">
-    <h3>Perfume Premium</h3>
-    <p><b>15000 Kz</b></p>
-    <button class="btn" onclick="adicionar('Perfume Premium',15000)">Adicionar</button>
-  </div>
+<div class="produto">
+<h3>Perfume Premium</h3>
+<p><b>15000 Kz</b></p>
+<button class="btn" onclick="adicionar('Perfume Premium',15000)">Adicionar</button>
+</div>
 
-  <div class="produto">
-    <img src="kit.jpg">
-    <h3>Kit Cosmético</h3>
-    <p><b>12000 Kz</b></p>
-    <button class="btn" onclick="adicionar('Kit Cosmético',12000)">Adicionar</button>
-  </div>
+<div class="produto">
+<h3>Kit Cosmético</h3>
+<p><b>12000 Kz</b></p>
+<button class="btn" onclick="adicionar('Kit Cosmético',12000)">Adicionar</button>
+</div>
 
-  <div class="produto">
-    <img src="fone.jpg">
-    <h3>Fone Bluetooth</h3>
-    <p><b>8000 Kz</b></p>
-    <button class="btn" onclick="adicionar('Fone Bluetooth',8000)">Adicionar</button>
-  </div>
+<div class="produto">
+<h3>Fone Bluetooth</h3>
+<p><b>8000 Kz</b></p>
+<button class="btn" onclick="adicionar('Fone Bluetooth',8000)">Adicionar</button>
+</div>
 
-  <div class="produto">
-    <img src="relogio.jpg">
-    <h3>Relógio Digital</h3>
-    <p><b>20000 Kz</b></p>
-    <button class="btn" onclick="adicionar('Relógio Digital',20000)">Adicionar</button>
-  </div>
+<div class="produto">
+<h3>Creme Facial</h3>
+<p><b>7000 Kz</b></p>
+<button class="btn" onclick="adicionar('Creme Facial',7000)">Adicionar</button>
+</div>
+
+<div class="produto">
+<h3>Relógio Digital</h3>
+<p><b>20000 Kz</b></p>
+<button class="btn" onclick="adicionar('Relógio Digital',20000)">Adicionar</button>
+</div>
+
+<div class="produto">
+<h3>Chuteira Predator</h3>
+<p><b>9000 Kz</b></p>
+<button class="btn" onclick="adicionar('Chuteira Predator',9000)">Adicionar</button>
+</div>
+
+<div class="produto">
+<h3>Perfume Luxo</h3>
+<p><b>18000 Kz</b></p>
+<button class="btn" onclick="adicionar('Perfume Luxo',18000)">Adicionar</button>
+</div>
+
+<div class="produto">
+<h3>Bolsa Feminina</h3>
+<p><b>14000 Kz</b></p>
+<button class="btn" onclick="adicionar('Bolsa Feminina',14000)">Adicionar</button>
+</div>
+
+<div class="produto">
+<h3>Smartwatch</h3>
+<p><b>25000 Kz</b></p>
+<button class="btn" onclick="adicionar('Smartwatch',25000)">Adicionar</button>
+</div>
+
+<div class="produto">
+<h3>Caixa de Som Bluetooth</h3>
+<p><b>11000 Kz</b></p>
+<button class="btn" onclick="adicionar('Caixa de Som Bluetooth',11000)">Adicionar</button>
+</div>
 
 </div>
 
-<!-- BOTÃO FINAL -->
-<button id="finalizar-btn" onclick="finalizarPedido()">
-Finalizar 🛒
-</button>
+<button id="finalizar-btn" onclick="finalizarPedido()">Finalizar 🛒</button>
 
-<!-- FORMULÁRIO -->
-<div id="formulario">
-  <h3>Finalizar Pedido</h3>
-
-  <input id="nome" placeholder="Seu nome" style="width:100%; margin-bottom:10px; padding:10px;">
-  <input id="endereco" placeholder="Seu endereço" style="width:100%; margin-bottom:10px; padding:10px;">
-
-  <button onclick="enviarPedido()" class="btn">
-    Enviar para WhatsApp
-  </button>
+<!-- FORM -->
+<div id="formulario" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:20px;">
+<input id="nome" placeholder="Seu nome"><br><br>
+<input id="endereco" placeholder="Endereço"><br><br>
+<button onclick="enviarPedido()">Enviar</button>
 </div>
 
-<!-- PEDIDOS -->
-<h2 style="text-align:center;">📦 Meus Pedidos</h2>
-<div id="lista-pedidos" style="padding:10px;"></div>
-
-<button onclick="limparHistorico()" class="btn-limpar">
-🗑 Limpar Histórico
-</button>
-
-<!-- SCRIPT -->
 <script>
 
 let carrinho = [];
@@ -208,37 +194,37 @@ function adicionar(nome, preco){
   atualizarCarrinho();
 }
 
-// remover
-function remover(index){
-  carrinho.splice(index,1);
-  atualizarCarrinho();
-}
-
 // atualizar
 function atualizarCarrinho(){
   let lista = document.getElementById("lista-carrinho");
-  let contador = document.getElementById("contador");
   let totalEl = document.getElementById("total");
+  let contador = document.getElementById("contador");
 
   lista.innerHTML = "";
-  let soma = 0;
+  let total = 0;
 
-  carrinho.forEach((item, index)=>{
-    soma += item.preco;
+  carrinho.forEach((item,i)=>{
+    total += item.preco;
 
     lista.innerHTML += `
-      <div>
-        ${item.nome} - ${item.preco} Kz
-        <button onclick="remover(${index})">❌</button>
-      </div>
+    <div>
+    ${item.nome} - ${item.preco} Kz
+    <button onclick="remover(${i})">❌</button>
+    </div>
     `;
   });
 
+  totalEl.innerText = total;
   contador.innerText = carrinho.length;
-  totalEl.innerText = soma;
 }
 
-// abrir carrinho
+// remover
+function remover(i){
+  carrinho.splice(i,1);
+  atualizarCarrinho();
+}
+
+// abrir
 function abrirCarrinho(){
   document.getElementById("painel-carrinho").style.right = "0";
 }
@@ -250,43 +236,56 @@ function fecharCarrinho(){
 
 // finalizar
 function finalizarPedido(){
-  if(carrinho.length === 0){
+  if(carrinho.length == 0){
     alert("Carrinho vazio!");
     return;
   }
   document.getElementById("formulario").style.display = "block";
 }
 
-// enviar
+// mensagem bonita
 function enviarPedido(){
-  let nome = document.getElementById("nome").value;
-  let endereco = document.getElementById("endereco").value;
 
-  let total = 0;
-  let mensagem = "🛒 Pedido:\n";
+let nome = document.getElementById("nome").value;
+let endereco = document.getElementById("endereco").value;
 
-  carrinho.forEach(item=>{
-    mensagem += `${item.nome} - ${item.preco} Kz\n`;
-    total += item.preco;
-  });
+let numero = Math.floor(Math.random()*100000);
+let data = new Date();
 
-  mensagem += `Total: ${total} Kz\n`;
-  mensagem += `Cliente: ${nome}\nEndereço: ${endereco}`;
+let msg = "🛒 *NOVO PEDIDO - ArtenaShop*\n";
+msg += "━━━━━━━━━━━━━━━\n";
+msg += "📦 Pedido Nº: " + numero + "\n";
+msg += "📅 Data: " + data.toLocaleDateString() + "\n";
+msg += "⏰ Hora: " + data.toLocaleTimeString() + "\n\n";
 
-  let url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
+msg += "🛍️ Itens:\n";
 
-  window.open(url, "_blank");
+let total = 0;
 
-  carrinho = [];
-  atualizarCarrinho();
+carrinho.forEach(item=>{
+  msg += "• " + item.nome + " — " + item.preco + " Kz\n\n";
+  total += item.preco;
+});
 
-  document.getElementById("formulario").style.display = "none";
-}
+msg += "━━━━━━━━━━━━━━━\n";
+msg += "💰 Total: " + total + " Kz\n";
+msg += "━━━━━━━━━━━━━━━\n";
 
-// limpar histórico
-function limparHistorico(){
-  localStorage.removeItem("pedidos");
-  document.getElementById("lista-pedidos").innerHTML = "";
+msg += "👤 Cliente: " + nome + "\n";
+msg += "📍 Endereço: " + endereco + "\n\n";
+
+msg += "🚀 Obrigado pela preferência!\n";
+msg += "📞 Contacto: 928363335\n";
+msg += "📌 Entraremos em contacto em breve.";
+
+let url = "https://wa.me/244928363335?text=" + encodeURIComponent(msg);
+
+window.open(url);
+
+carrinho = [];
+atualizarCarrinho();
+
+document.getElementById("formulario").style.display = "none";
 }
 
 </script>
