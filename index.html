@@ -289,15 +289,15 @@ function finalizarPedido(){
 
     mostrarMensagem();
 
-    let mensagem = "🛒 Pedido ArtenaShop:%0A";
+    let mensagem = "🛒 Pedido ArtenaShop:\n\n";
     let total = 0;
 
     carrinho.forEach(item => {
-        mensagem += "- " + item.nome + " (" + item.preco + " Kz)%0A";
+        mensagem += "• " + item.nome + " (" + item.preco + " Kz)\n";
         total += item.preco;
     });
 
-    mensagem += "%0ATotal: " + total + " Kz";
+    mensagem += "\nTotal: " + total + " Kz";
 
     const url = "https://wa.me/244928363335?text=" + encodeURIComponent(mensagem);
 
