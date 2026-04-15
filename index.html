@@ -293,7 +293,7 @@ function finalizarPedido(){
     let total = 0;
 
     carrinho.forEach(item => {
-        mensagem += "• " + item.nome +" - * " (" + item.preco + " Kz*)\n";
+        mensagem += "• " + item.nome + " - *" + item.preco + " Kz*\n";
         total += item.preco;
     });
 
