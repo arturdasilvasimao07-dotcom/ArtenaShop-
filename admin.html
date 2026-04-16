@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Painel Admin</title>
+</head>
+
+<body>
+
+<h2>📊 Painel Admin</h2>
+
+<button onclick="logout()">Sair</button>
+
+<hr>
+
+<div id="lista"></div>
+
+<script>
+
+// proteção
+if(localStorage.getItem("admin") !== "ok"){
+  window.location.href = "login.html";
+}
+
+// logout
+function logout(){
+  localStorage.removeItem("admin");
+  window.location.href="login.html";
+}
+
+// carregar pedidos
+function carregar(){
+  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+  let lista = document.getElementById("lista");
+
+  lista.innerHTML="";
+
+  pedidos.forEach((p,i)=>{
+    lista.innerHTML+=`
+      <div style="border:1px solid #ccc; margin:10px; padding:10px;">
+        <b>Cliente:</b> ${p.nome}<br>
+        <b>Total:</b> ${p.total} Kz<br>
+        <b>Data:</b> ${p.data}<br><br>
+
+        <button onclick="confirmar(${i})">✅ Confirmar</button>
+        <button onclick="remover(${i})">🗑 Apagar</button>
+      </div>
+    `;
+  });
+}
+
+// confirmar pedido
+function confirmar(i){
+  alert("Pedido confirmado!");
+}
+
+// apagar pedido
+function remover(i){
+  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+  pedidos.splice(i,1);
+  localStorage.setItem("pedidos", JSON.stringify(pedidos));
+  carregar();
+}
+
+carregar();
+
+</script>
+
+</body>
+</html>
