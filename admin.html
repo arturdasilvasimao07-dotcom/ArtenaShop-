@@ -80,12 +80,12 @@ const db = getFirestore(app);
 window.updateDoc = updateDoc;
 window.doc = doc;
 
-// 🔐 PROTEÇÃO ADMIN
+// PROTEÇÃO ADMIN
 if(localStorage.getItem("admin") !== "ok"){
   window.location.href = "login.html";
 }
 
-// 🔥 TEMPO REAL
+// TEMPO REAL
 onSnapshot(collection(db, "pedidos"), (snapshot) => {
   let lista = document.getElementById("lista");
   lista.innerHTML = "";
