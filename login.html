@@ -5,6 +5,11 @@
 </head>
 
 <body>
+  <script>
+if(localStorage.getItem("admin") === "ok"){
+  window.location.href = "admin.html";
+}
+</script>
 
 <h2>🔐 Login Admin</h2>
 
@@ -15,9 +20,12 @@
 
 <script>
 function login(){
-  if(user.value==="admin" && pass.value==="1234"){
+  let user = document.getElementById("user").value;
+  let pass = document.getElementById("pass").value;
+
+  if(user === "admin" && pass === "1234"){
     localStorage.setItem("admin","ok");
-    window.location.href="admin.html";
+    window.location.href = "admin.html";
   }else{
     alert("Acesso negado!");
   }
