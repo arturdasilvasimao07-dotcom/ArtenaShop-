@@ -1,68 +1,131 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Painel Admin</title>
+  <title>Painel Admin - ArtenaShop</title>
+
+  <style>
+    body{
+      font-family:Arial;
+      background:#f5f5f5;
+      margin:0;
+      padding:20px;
+    }
+
+    h1{
+      text-align:center;
+    }
+
+    .pedido{
+      background:white;
+      padding:15px;
+      border-radius:12px;
+      margin-bottom:10px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .btn{
+      padding:8px;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      margin-top:5px;
+    }
+
+    .confirmar{background:#27ae60;color:white;}
+    .entregue{background:#2980b9;color:white;}
+    .cancelar{background:#e74c3c;color:white;}
+
+    #logout{
+      position:fixed;
+      top:10px;
+      right:10px;
+      background:black;
+      color:white;
+      padding:10px;
+    }
+  </style>
 </head>
 
 <body>
 
-<h2>📊 Painel Admin</h2>
+<button id="logout" onclick="logout()">Sair</button>
 
-<button onclick="logout()">Sair</button>
-
-<hr>
+<h1>📊 Painel Admin</h1>
 
 <div id="lista"></div>
 
-<script>
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  doc,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
 
-// proteção
+const firebaseConfig = {
+  apiKey: "AIzaSyCjMXkLRne-AIP18eNYLy8rKSEAyXxkYGo",
+  authDomain: "artenashop-971fa.firebaseapp.com",
+  projectId: "artenashop-971fa",
+  storageBucket: "artenashop-971fa.appspot.com",
+  messagingSenderId: "103649440227",
+  appId: "1:103649440227:web:26017341b0"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.updateDoc = updateDoc;
+window.doc = doc;
+
+// 🔐 PROTEÇÃO ADMIN
 if(localStorage.getItem("admin") !== "ok"){
   window.location.href = "login.html";
 }
 
-// logout
-function logout(){
-  localStorage.removeItem("admin");
-  window.location.href="login.html";
-}
-
-// carregar pedidos
-function carregar(){
-  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+// 🔥 TEMPO REAL
+onSnapshot(collection(db, "pedidos"), (snapshot) => {
   let lista = document.getElementById("lista");
+  lista.innerHTML = "";
 
-  lista.innerHTML="";
+  snapshot.forEach((docSnap) => {
+    let p = docSnap.data();
 
-  pedidos.forEach((p,i)=>{
-    lista.innerHTML+=`
-      <div style="border:1px solid #ccc; margin:10px; padding:10px;">
-        <b>Cliente:</b> ${p.nome}<br>
-        <b>Total:</b> ${p.total} Kz<br>
-        <b>Data:</b> ${p.data}<br><br>
+    lista.innerHTML += `
+    <div class="pedido">
+      <b>👤 Cliente:</b> ${p.nome}<br><br>
+      <b>📍 Endereço:</b> ${p.endereco}<br><br>
+      <b>💰 Total:</b> ${p.total} Kz<br><br>
+      <b>📅 Data:</b> ${p.data}<br><br>
+      <b>📦 Status:</b> ${p.status || "pendente"}<br><br>
 
-        <button onclick="confirmar(${i})">✅ Confirmar</button>
-        <button onclick="remover(${i})">🗑 Apagar</button>
-      </div>
+      <button class="btn confirmar" onclick="mudarStatus('${docSnap.id}','confirmado')">
+        Confirmar
+      </button>
+
+      <button class="btn entregue" onclick="mudarStatus('${docSnap.id}','entregue')">
+        Entregue
+      </button>
+
+      <button class="btn cancelar" onclick="mudarStatus('${docSnap.id}','cancelado')">
+        Cancelar
+      </button>
+    </div>
     `;
   });
+});
+
+window.mudarStatus = async function(id, status){
+  let ref = doc(db, "pedidos", id);
+  await updateDoc(ref, { status: status });
 }
 
-// confirmar pedido
-function confirmar(i){
-  alert("Pedido confirmado!");
+window.logout = function(){
+  localStorage.removeItem("admin");
+  window.location.href = "login.html";
 }
-
-// apagar pedido
-function remover(i){
-  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
-  pedidos.splice(i,1);
-  localStorage.setItem("pedidos", JSON.stringify(pedidos));
-  carregar();
-}
-
-carregar();
-
 </script>
 
 </body>
