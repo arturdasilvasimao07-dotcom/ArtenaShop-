@@ -4,117 +4,43 @@
   <title>ArtenaShop</title>
 
   <style>
-    body{
-      font-family: Arial;
-      background:#f5f5f5;
-      margin:0;
-    }
+    body{font-family:Arial;background:#f5f5f5;margin:0;}
 
     .produto{
-      background:white;
-      width:250px;
-      margin:10px;
-      padding:15px;
-      border-radius:10px;
-      box-shadow:0 5px 10px rgba(0,0,0,0.1);
+      background:white;width:250px;margin:10px;padding:15px;
+      border-radius:10px;box-shadow:0 5px 10px rgba(0,0,0,0.1);
       text-align:center;
-      transition:0.3s;
     }
 
-    .produto:hover{
-      transform: translateY(-5px);
-    }
-
-    .produto img{
-      width:100%;
-      border-radius:10px;
-    }
+    .produto img{width:100%;border-radius:10px;}
 
     .btn{
-      background:#27ae60;
-      color:white;
-      padding:10px;
-      border:none;
-      border-radius:5px;
-      cursor:pointer;
-    }
-
-    .btn:active{
-      transform:scale(0.95);
-    }
-
-    .btn-limpar{
-      background:#ff4d4d;
-      color:white;
-      padding:10px;
-      border:none;
-      border-radius:8px;
-      margin-top:10px;
-      width:100%;
+      background:#27ae60;color:white;padding:10px;
+      border:none;border-radius:5px;cursor:pointer;
     }
 
     #carrinho{
-      position:fixed;
-      top:0;
-      right:-100%;
-      width:300px;
-      height:100%;
-      background:white;
-      box-shadow:-5px 0 15px rgba(0,0,0,0.3);
-      padding:15px;
-      transition:0.3s;
-      z-index:999;
+      position:fixed;top:0;right:-100%;
+      width:300px;height:100%;background:white;
+      padding:15px;transition:0.3s;
     }
 
     #botao-carrinho{
-      position:fixed;
-      top:10px;
-      right:10px;
-      background:#27ae60;
-      color:white;
-      border:none;
-      padding:10px 15px;
-      border-radius:20px;
-      z-index:1000;
+      position:fixed;top:10px;right:10px;
+      background:#27ae60;color:white;border:none;
+      padding:10px;border-radius:20px;
     }
 
     #finalizar-btn{
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      background:#27ae60;
-      color:white;
-      padding:15px;
-      border:none;
-      border-radius:50px;
+      position:fixed;bottom:20px;right:20px;
+      background:#27ae60;color:white;padding:15px;
+      border:none;border-radius:50px;
     }
 
     #formulario{
-      display:none;
-      position:fixed;
-      top:50%;
-      left:50%;
+      display:none;position:fixed;top:50%;left:50%;
       transform:translate(-50%,-50%);
-      background:white;
-      padding:20px;
-      border-radius:10px;
-      box-shadow:0 4px 15px rgba(0,0,0,0.3);
-      z-index:3000;
-      width:250px;
-      text-align:center;
-    }
-
-    #formulario input{
-      width:100%;
-      margin-bottom:10px;
-      padding:10px;
-    }
-
-    .pedido{
-      background:white;
-      margin:10px;
-      padding:10px;
-      border-radius:10px;
+      background:white;padding:20px;border-radius:10px;
     }
   </style>
 </head>
@@ -127,62 +53,26 @@
 
 <div id="carrinho">
   <h2>🛒 Carrinho</h2>
-  <button onclick="fecharCarrinho()">Fechar ❌</button>
+  <button onclick="fecharCarrinho()">Fechar</button>
   <hr>
-
   <div id="lista-carrinho"></div>
-
   <p><b>Total: <span id="total">0</span> Kz</b></p>
-
-  <button class="btn-limpar" onclick="limparCarrinho()">🗑 Limpar Carrinho</button>
 </div>
 
-<div style="text-align:center; padding:20px;">
-  <img src="8EA06E2D-D680-4B81-A5BE-98623B87500B.png" style="width:100px;">
-  <h1>🛍️ ArtenaShop</h1>
+<div style="text-align:center;padding:20px;">
+<h1>🛍️ ArtenaShop</h1>
 </div>
 
-<div style="display:flex; flex-wrap:wrap; justify-content:center;">
+<div style="display:flex;flex-wrap:wrap;justify-content:center;" id="produtos"></div>
 
-<script>
-let produtos = [
-["Perfume Premium",15000,"perfume.jpg"],
-["Kit Cosmético",12000,"kit.jpg"],
-["Fone Bluetooth",8000,"fone.jpg"],
-["Creme Facial",7000,"creme.jpg"],
-["Relógio Digital",20000,"relogio.jpg"],
-["Chuteira Predator",9000,"chuteira.jpg"],
-["Perfume Luxo",18000,"perfume.jpg"],
-["Bolsa Feminina",14000,"bolsa.jpg"],
-["Smartwatch",25000,"smartwatch.jpg"],
-["Caixa de Som",11000,"caixa de som.jpg"]
-];
-
-document.write(produtos.map(p=>`
-<div class="produto">
-<img src="${p[2]}">
-<h3>${p[0]}</h3>
-<p><b>${p[1]} Kz</b></p>
-<button class="btn" onclick="adicionar('${p[0]}',${p[1]})">
-🛒 Adicionar ao carrinho
-</button>
-</div>
-`).join(""));
-</script>
-
-</div>
-
-<button id="finalizar-btn" onclick="finalizarPedido()">Finalizar 🛒</button>
+<button id="finalizar-btn" onclick="finalizarPedido()">Finalizar</button>
 
 <div id="formulario">
 <h3>Finalizar Pedido</h3>
-<input id="nome" placeholder="Seu nome">
-<input id="endereco" placeholder="Seu endereço">
+<input id="nome" placeholder="Nome"><br><br>
+<input id="endereco" placeholder="Endereço"><br><br>
 <button class="btn" onclick="enviarPedido()">Enviar</button>
 </div>
-
-<h2 style="padding:10px;">📊 Pedidos</h2>
-<div id="lista-pedidos"></div>
 
 <!-- FIREBASE -->
 <script type="module">
@@ -193,10 +83,9 @@ const firebaseConfig = {
   apiKey: "AIzaSyCjMXkLRne-AIP18eNYLy8rKSEAyXxkYGo",
   authDomain: "artenashop-971fa.firebaseapp.com",
   projectId: "artenashop-971fa",
-  storageBucket: "artenashop-971fa.firebasestorage.app",
+  storageBucket: "artenashop-971fa.appspot.com",
   messagingSenderId: "103649440227",
-  appId: "1:103649440227:web:07c545ef3b8932f22ff0d6",
-  measurementId: "G-S5VY5SCBGV"
+  appId: "1:103649440227:web:26017341b0"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -206,175 +95,92 @@ window.collection = collection;
 </script>
 
 <script>
-let carrinho = [];
+let carrinho=[];
 
-function salvarCarrinho(){
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+let produtos=[
+["Perfume Premium",15000],
+["Kit Cosmético",12000],
+["Fone Bluetooth",8000],
+["Creme Facial",7000],
+["Relógio Digital",20000],
+["Chuteira Predator",9000]
+];
+
+document.getElementById("produtos").innerHTML =
+produtos.map(p=>`
+<div class="produto">
+<h3>${p[0]}</h3>
+<p>${p[1]} Kz</p>
+<button class="btn" onclick="add('${p[0]}',${p[1]})">
+Adicionar
+</button>
+</div>`).join("");
+
+function add(nome,preco){
+  carrinho.push({nome,preco});
+  atualizar();
 }
 
-function carregarCarrinho(){
-  let dados = localStorage.getItem("carrinho");
-  if(dados){
-    carrinho = JSON.parse(dados);
-    atualizarCarrinho();
-  }
-}
+function atualizar(){
+  let lista=document.getElementById("lista-carrinho");
+  let total=0;
+  lista.innerHTML="";
 
-function adicionar(nome, preco){
-  carrinho.push({nome, preco});
-  atualizarCarrinho();
-  salvarCarrinho();
+  carrinho.forEach((i,index)=>{
+    total+=i.preco;
+    lista.innerHTML+=`${i.nome} - ${i.preco} 
+    <button onclick="remover(${index})">x</button><br>`;
+  });
+
+  document.getElementById("total").innerText=total;
+  document.getElementById("contador").innerText=carrinho.length;
 }
 
 function remover(i){
   carrinho.splice(i,1);
-  atualizarCarrinho();
-  salvarCarrinho();
+  atualizar();
 }
 
-function limparCarrinho(){
-  carrinho = [];
-  atualizarCarrinho();
-  salvarCarrinho();
-}
-
-function atualizarCarrinho(){
-  let lista = document.getElementById("lista-carrinho");
-  let total = document.getElementById("total");
-  let contador = document.getElementById("contador");
-
-  lista.innerHTML="";
-  let soma=0;
-
-  carrinho.forEach((item,i)=>{
-    soma+=item.preco;
-
-    lista.innerHTML+=`
-    <div>
-    ${item.nome} - ${item.preco} Kz
-    <button onclick="remover(${i})">❌</button>
-    </div>`;
-  });
-
-  total.innerText=soma;
-  contador.innerText=carrinho.length;
-}
-
-function abrirCarrinho(){
-  document.getElementById("carrinho").style.right="0";
-}
-function fecharCarrinho(){
-  document.getElementById("carrinho").style.right="-100%";
-}
+function abrirCarrinho(){document.getElementById("carrinho").style.right="0";}
+function fecharCarrinho(){document.getElementById("carrinho").style.right="-100%";}
 
 function finalizarPedido(){
-  if(carrinho.length==0){
-    alert("Carrinho vazio!");
-    return;
-  }
+  if(carrinho.length==0)return alert("Carrinho vazio");
   document.getElementById("formulario").style.display="block";
 }
 
 function enviarPedido(){
-  let nome = document.getElementById("nome").value;
-  let endereco = document.getElementById("endereco").value;
+  let nome=document.getElementById("nome").value;
+  let endereco=document.getElementById("endereco").value;
 
-  let numeroPedido = Math.floor(Math.random() * 100000);
-  let data = new Date();
-  let dataFormatada = data.toLocaleDateString();
-  let horaFormatada = data.toLocaleTimeString();
+  let total=0;
+  let texto="🛒 *NOVO PEDIDO - ArtenaShop*\n━━━━━━━━━━━━━━━\n";
 
-  let total = 0;
-  let resumo = {};
-
-  carrinho.forEach(item => {
-    if(resumo[item.nome]){
-      resumo[item.nome].qtd += 1;
-      resumo[item.nome].total += item.preco;
-    } else {
-      resumo[item.nome] = {
-        qtd: 1,
-        total: item.preco
-      };
-    }
+  carrinho.forEach(i=>{
+    texto+=`• ${i.nome} — ${i.preco} Kz\n`;
+    total+=i.preco;
   });
 
-  function formatar(valor){
-    return valor.toLocaleString("pt-BR");
-  }
-
-  let msg = "🛒 *NOVO PEDIDO - ArtenaShop*\n";
-  msg += "━━━━━━━━━━━━━━━\n";
-  msg += "📦 Pedido Nº: " + numeroPedido + "\n";
-  msg += "📅 Data: " + dataFormatada + "\n";
-  msg += "⏰ Hora: " + horaFormatada + "\n\n";
-  msg += "🛍️ Itens:\n\n";
-
-  for(let nomeProduto in resumo){
-    let item = resumo[nomeProduto];
-    msg += `• ${item.qtd}x ${nomeProduto} — ${formatar(item.total)} Kz\n\n`;
-    total += item.total;
-  }
-
-  msg += "━━━━━━━━━━━━━━━\n";
-  msg += "💰 Total: " + formatar(total) + " Kz\n";
-  msg += "━━━━━━━━━━━━━━━\n\n";
-  msg += "👤 Cliente: " + nome + "\n";
-  msg += "📍 Endereço: " + endereco + "\n\n";
-  msg += "🚀 Obrigado pela preferência!\n";
-  msg += "📞 Contacto: 928363335\n";
-  msg += "📌 Entraremos em contacto em breve.";
+  texto+=`━━━━━━━━━━━━━━━\n💰 Total: ${total} Kz\n\n`;
+  texto+=`👤 Cliente: ${nome}\n📍 Endereço: ${endereco}\n\n`;
+  texto+=`🚀 Obrigado!\n📞 928363335`;
 
   // WhatsApp
-  window.open("https://wa.me/244928363335?text=" + encodeURIComponent(msg));
+  window.open("https://wa.me/244928363335?text="+encodeURIComponent(texto));
 
-  // FIREBASE
-  addDoc(collection(db, "pedidos"), {
-    id: numeroPedido,
+  // Firebase
+  addDoc(collection(db,"pedidos"),{
     nome,
     endereco,
     total,
-    data: dataFormatada + " " + horaFormatada
+    status:"pendente",
+    data:new Date().toLocaleString()
   });
 
-  // localStorage
-  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
-  pedidos.push({id: numeroPedido, nome, total, data: dataFormatada});
-  localStorage.setItem("pedidos", JSON.stringify(pedidos));
-
-  carrinho = [];
-  atualizarCarrinho();
-  salvarCarrinho();
+  carrinho=[];
+  atualizar();
   document.getElementById("formulario").style.display="none";
-
-  carregarPedidos();
 }
-
-function carregarPedidos(){
-  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
-  let lista = document.getElementById("lista-pedidos");
-
-  lista.innerHTML = "";
-
-  pedidos.forEach(p=>{
-    lista.innerHTML += `
-    <div style="
-      background:white;
-      padding:15px;
-      border-radius:12px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.1);
-      margin-bottom:10px;
-    ">
-      <b>👤 Cliente:</b> ${p.nome}<br><br>
-      <b>💰 Total:</b> ${p.total} Kz<br><br>
-      <b>📅 Data:</b> ${p.data}
-    </div>
-    `;
-  });
-}
-
-carregarCarrinho();
-carregarPedidos();
 </script>
 
 </body>
