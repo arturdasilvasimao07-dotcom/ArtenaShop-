@@ -1,187 +1,170 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
-  <title>ArtenaShop</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtenaShop - Loja Online</title>
 
-  <style>
-    body{font-family:Arial;background:#f5f5f5;margin:0;}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-    .produto{
-      background:white;width:250px;margin:10px;padding:15px;
-      border-radius:10px;box-shadow:0 5px 10px rgba(0,0,0,0.1);
-      text-align:center;
-    }
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f4f6f9;
+}
 
-    .produto img{width:100%;border-radius:10px;}
+header {
+    background: #0b1f3a;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    align-items: center;
+}
 
-    .btn{
-      background:#27ae60;color:white;padding:10px;
-      border:none;border-radius:5px;cursor:pointer;
-    }
+header h2 span { color: red; }
 
-    #carrinho{
-      position:fixed;top:0;right:-100%;
-      width:300px;height:100%;background:white;
-      padding:15px;transition:0.3s;
-    }
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
 
-    #botao-carrinho{
-      position:fixed;top:10px;right:10px;
-      background:#27ae60;color:white;border:none;
-      padding:10px;border-radius:20px;
-    }
+.hero {
+    background: linear-gradient(120deg,#0b1f3a,#1e3c72);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
 
-    #finalizar-btn{
-      position:fixed;bottom:20px;right:20px;
-      background:#27ae60;color:white;padding:15px;
-      border:none;border-radius:50px;
-    }
+.hero h1 { font-size: 36px; }
 
-    #formulario{
-      display:none;position:fixed;top:50%;left:50%;
-      transform:translate(-50%,-50%);
-      background:white;padding:20px;border-radius:10px;
-    }
-  </style>
+.btn {
+    background: red;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.section {
+    padding: 40px 20px;
+}
+
+.produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card img { width: 100%; border-radius: 8px; }
+
+.card h3 { margin: 10px 0; }
+
+.preco { color: red; font-weight: bold; }
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap: 20px;
+    text-align: center;
+}
+
+.feature {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+footer {
+    background: #0b1f3a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+</style>
 </head>
 
 <body>
 
-<button id="botao-carrinho" onclick="abrirCarrinho()">
-🛒 (<span id="contador">0</span>)
-</button>
+<header>
+    <h2>Artena<span>Shop</span></h2>
+    <nav>
+        <a href="#">Início</a>
+        <a href="#produtos">Produtos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+</header>
 
-<div id="carrinho">
-  <h2>🛒 Carrinho</h2>
-  <button onclick="fecharCarrinho()">Fechar</button>
-  <hr>
-  <div id="lista-carrinho"></div>
-  <p><b>Total: <span id="total">0</span> Kz</b></p>
-</div>
+<section class="hero">
+    <h1>Tudo o que você precisa, em um só lugar</h1>
+    <p>Qualidade • Preço justo • Entrega rápida</p>
+    <a href="https://wa.me/244928363335" class="btn">Comprar Agora</a>
+</section>
 
-<div style="text-align:center;padding:20px;">
-<h1>🛍️ ArtenaShop</h1>
-</div>
+<section class="section" id="produtos">
+    <h2>Produtos em Destaque</h2>
+    <div class="produtos">
 
-<div style="display:flex;flex-wrap:wrap;justify-content:center;" id="produtos"></div>
+        <div class="card">
+            <img src="https://via.placeholder.com/300">
+            <h3>Produto 1</h3>
+            <p class="preco">60.000 Kz</p>
+            <a href="https://wa.me/244928363335" class="btn">Comprar</a>
+        </div>
 
-<button id="finalizar-btn" onclick="finalizarPedido()">Finalizar</button>
+        <div class="card">
+            <img src="https://via.placeholder.com/300">
+            <h3>Produto 2</h3>
+            <p class="preco">60.000 Kz</p>
+            <a href="https://wa.me/244928363335" class="btn">Comprar</a>
+        </div>
 
-<div id="formulario">
-<h3>Finalizar Pedido</h3>
-<input id="nome" placeholder="Nome"><br><br>
-<input id="endereco" placeholder="Endereço"><br><br>
-<button class="btn" onclick="enviarPedido()">Enviar</button>
-</div>
+        <div class="card">
+            <img src="https://via.placeholder.com/300">
+            <h3>Produto 3</h3>
+            <p class="preco">60.000 Kz</p>
+            <a href="https://wa.me/244928363335" class="btn">Comprar</a>
+        </div>
 
-<!-- FIREBASE -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+    </div>
+</section>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCjMXkLRne-AIP18eNYLy8rKSEAyXxkYGo",
-  authDomain: "artenashop-971fa.firebaseapp.com",
-  projectId: "artenashop-971fa",
-  storageBucket: "artenashop-971fa.appspot.com",
-  messagingSenderId: "103649440227",
-  appId: "1:103649440227:web:26017341b0"
-};
+<section class="section">
+    <div class="features">
+        <div class="feature">✔ Produtos de Qualidade</div>
+        <div class="feature">💰 Preços Justos</div>
+        <div class="feature">🚚 Entrega Rápida</div>
+        <div class="feature">🤝 Atendimento de Confiança</div>
+    </div>
+</section>
 
-const app = initializeApp(firebaseConfig);
-window.db = getFirestore(app);
-window.addDoc = addDoc;
-window.collection = collection;
-</script>
+<section class="section" id="sobre">
+    <h2>Sobre a ArtenaShop</h2>
+    <p>Somos uma loja online focada em oferecer produtos de qualidade com preços acessíveis e entrega rápida. A nossa missão é garantir a melhor experiência de compra para os nossos clientes.</p>
+</section>
 
-<script>
-let carrinho=[];
+<section class="section" id="contacto">
+    <h2>Contacto</h2>
+    <p>WhatsApp: +244 928 363 335</p>
+    <a href="https://wa.me/244928363335" class="btn">Falar no WhatsApp</a>
+</section>
 
-let produtos=[
-["Perfume Premium",15000],
-["Kit Cosmético",12000],
-["Fone Bluetooth",8000],
-["Creme Facial",7000],
-["Relógio Digital",20000],
-["Chuteira Predator",9000]
-];
-
-document.getElementById("produtos").innerHTML =
-produtos.map(p=>`
-<div class="produto">
-<h3>${p[0]}</h3>
-<p>${p[1]} Kz</p>
-<button class="btn" onclick="add('${p[0]}',${p[1]})">
-Adicionar
-</button>
-</div>`).join("");
-
-function add(nome,preco){
-  carrinho.push({nome,preco});
-  atualizar();
-}
-
-function atualizar(){
-  let lista=document.getElementById("lista-carrinho");
-  let total=0;
-  lista.innerHTML="";
-
-  carrinho.forEach((i,index)=>{
-    total+=i.preco;
-    lista.innerHTML+=`${i.nome} - ${i.preco} 
-    <button onclick="remover(${index})">x</button><br>`;
-  });
-
-  document.getElementById("total").innerText=total;
-  document.getElementById("contador").innerText=carrinho.length;
-}
-
-function remover(i){
-  carrinho.splice(i,1);
-  atualizar();
-}
-
-function abrirCarrinho(){document.getElementById("carrinho").style.right="0";}
-function fecharCarrinho(){document.getElementById("carrinho").style.right="-100%";}
-
-function finalizarPedido(){
-  if(carrinho.length==0)return alert("Carrinho vazio");
-  document.getElementById("formulario").style.display="block";
-}
-
-function enviarPedido(){
-  let nome=document.getElementById("nome").value;
-  let endereco=document.getElementById("endereco").value;
-
-  let total=0;
-  let texto="🛒 *NOVO PEDIDO - ArtenaShop*\n━━━━━━━━━━━━━━━\n";
-
-  carrinho.forEach(i=>{
-    texto+=`• ${i.nome} — ${i.preco} Kz\n`;
-    total+=i.preco;
-  });
-
-  texto+=`━━━━━━━━━━━━━━━\n💰 Total: ${total} Kz\n\n`;
-  texto+=`👤 Cliente: ${nome}\n📍 Endereço: ${endereco}\n\n`;
-  texto+=`🚀 Obrigado!\n📞 928363335`;
-
-  // WhatsApp
-  window.open("https://wa.me/244928363335?text="+encodeURIComponent(texto));
-
-  // Firebase
-  addDoc(collection(db,"pedidos"),{
-    nome,
-    endereco,
-    total,
-    status:"pendente",
-    data:new Date().toLocaleString()
-  });
-
-  carrinho=[];
-  atualizar();
-  document.getElementById("formulario").style.display="none";
-}
-</script>
+<footer>
+    <p>© 2026 ArtenaShop | Todos os direitos reservados</p>
+</footer>
 
 </body>
 </html>
